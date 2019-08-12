@@ -29,6 +29,13 @@ class StockMarketFacts::CLI
       case input
       when "1"
         puts "Most Popular Stocks"
+        puts "Enter 'm' to view menu again"
+        input = gets.strip.downcase
+        case input
+        when input = "m"
+          list_menu
+        end
+        when
       when "2"
         puts "Key Stats"
       when "3"
