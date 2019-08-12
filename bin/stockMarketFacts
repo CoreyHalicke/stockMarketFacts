@@ -1,3 +1,5 @@
 #!/usr/bin/env ruby
+require './lib/stockMarketFacts'
 
-puts "Hello World"
+
+StockMarketFacts::CLI.new.call

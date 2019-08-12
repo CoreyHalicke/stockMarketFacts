@@ -1,6 +1,2 @@
-require "stockMarketFacts/version"
-
-module StockMarketFacts
-  class Error < StandardError; end
-  # Your code goes here...
-end
+require_relative "stockMarketFacts/version"
+require_relative './stockMarketFacts/cli'
