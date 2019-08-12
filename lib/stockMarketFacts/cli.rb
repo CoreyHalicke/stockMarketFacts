@@ -39,10 +39,8 @@ class StockMarketFacts::CLI
         puts "Commodities"
       when "8"
         puts "How stocks are doing this year"
-
       when "9"
         puts "Search by Stock Symbol"
-
         puts "Type in the Stock Symbol for the Company you are looking for:"
       end
     end
