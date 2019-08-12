@@ -8,6 +8,7 @@ class StockMarketFacts::CLI
 
   def list_menu
     puts <<-DOC
+
     ::: MAIN MENU :::
 
     What would you like to view about the market?
@@ -20,6 +21,7 @@ class StockMarketFacts::CLI
       7. Commodities
       8. How stocks are doing this year
       9. Search by Stock Symbol
+
     DOC
   end
 
@@ -65,6 +67,9 @@ class StockMarketFacts::CLI
         search_stock_menu
       when "x"
 
+      else
+        puts "Not sure what you want, please pick an option from the menu."
+        list_menu
       end
     end
   end
@@ -77,6 +82,7 @@ class StockMarketFacts::CLI
 
   def list_stock_search_menu
     puts <<-DOC
+
     ::: #{@company_symbol} STOCK MENU :::
 
     What would you like to know about #{@company_symbol}?
@@ -90,6 +96,7 @@ class StockMarketFacts::CLI
       8. Company Contact Information
       9. Shareholders
       10. Top Executives
+
     DOC
 
   end
@@ -132,15 +139,19 @@ class StockMarketFacts::CLI
         puts "Company Description"
         search_stock_options
       when "8"
-        puts ""
+        puts "Company Contact Information"
         search_stock_options
       when "9"
-        puts ""
+        puts "Shareholders"
         search_stock_options
       when "10"
-        puts ""
+        puts "Top Executives"
+        search_stock_options
       when "x"
 
+      else
+        puts "Not sure what you want, please pick an option from the menu."
+        list_stock_search_menu
       end
     end
   end
@@ -148,9 +159,9 @@ class StockMarketFacts::CLI
 end
 
 
-# =begin
-# git add --all
-# git commit -m "modified: cli.rb"
-# git push
-#
-# =end
+=begin
+git add --all
+git commit -m "modified: cli.rb"
+git push
+
+=end
