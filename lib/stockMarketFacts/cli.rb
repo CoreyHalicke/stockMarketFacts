@@ -7,7 +7,7 @@ class StockMarketFacts::CLI
 
   def main_menu
   input = nil
-    while input != 'x' || input != "n"
+    while input != 'x'
       puts <<-DOC
       What would you like to view?
         1. Most Popular Stocks
@@ -44,7 +44,6 @@ class StockMarketFacts::CLI
         puts "Search by Stock Symbol"
 
         puts "Type in the Stock Symbol for the Company you are looking for:"
-        input = gets.strip.downcase
       end
     end
   end
