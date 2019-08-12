@@ -35,7 +35,6 @@ class StockMarketFacts::CLI
         when input = "m"
           list_menu
         end
-        when
       when "2"
         puts "Key Stats"
       when "3"
@@ -63,5 +62,6 @@ end
 
 =begin
 git add --all
-git commit -m "modified: "
+git commit -m "modified: cli.rb"
+git push
 =end
