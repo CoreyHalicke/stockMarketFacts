@@ -59,7 +59,8 @@ Welcome to Stock Market Facts!
           'b' to go back | 'n' for new company | 'm' for main menu | 'x' to exit
 
 
-classes i need:
+
+
   market class
     for the main menu data pulling from
     https://money.cnn.com/data/markets/
@@ -100,7 +101,12 @@ classes i need:
 
 
 
+  =begin
+  git add --all
+  git commit -m "modified: NOTES.md"
+  git push
 
+  =end
 
 
 

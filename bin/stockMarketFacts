@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
-require './lib/stockMarketFacts'
 
+# require "bundler/setup"
+# require "stockMarketFacts"
+require './lib/stockMarketFacts'
 
 StockMarketFacts::CLI.new.call

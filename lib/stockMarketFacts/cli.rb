@@ -2,6 +2,7 @@ class StockMarketFacts::CLI
 
   def call
     puts "Welcome to Quick Stock Market Facts!"
+
     main_menu
     # goodbye
   end
@@ -32,6 +33,8 @@ class StockMarketFacts::CLI
   def main_menu
   @input = nil
   list_menu
+  StockMarketFacts::Market.market_scrape
+
     while @input != 'x'
       @input = gets.strip.downcase
       case @input
@@ -39,9 +42,11 @@ class StockMarketFacts::CLI
         list_menu
       when "1"
         puts "Most Popular Stocks"
+        StockMarketFacts::Market.popular_stocks
         options
       when "2"
         puts "Key Stats"
+        StockMarketFacts::Market.key_stats
         options
       when "3"
         puts "World Markets"
