@@ -22,11 +22,11 @@ class StockMarketFacts::CLI
   end
 
   def main_menu
-  input = nil
+  @input = nil
   list_menu
-    while input != 'x'
-      input = gets.strip.downcase
-      case input
+    while @input != 'x'
+      @input = gets.strip.downcase
+      case @input
       when "m"
         list_menu
       when "1"
@@ -74,60 +74,65 @@ class StockMarketFacts::CLI
 
   def list_stock_search_menu
     puts <<-DOC
-    What would you like to view?
-      1. Most Popular Stocks
-      2. Key Stats
-      3. World Markets
-      4. Gainers
-      5. Losers
-      6. Sector Performance
-      7. Commodities
-      8. How stocks are doing this year
-      9. Search by Stock Symbol
+    What would you like to view about #{@input.upcase}?
+    1. Current Price / Today's Change / 52-Week Range / Year-to-Date Change
+    2. Today's Trading Information
+    3. Growth & Valuation
+    4. Competitors
+    5. Financials
+    6. Profile
+    7. Company Description
+    8. Company Contact Information
+    9. Shareholders
+    10. Top Executives
     DOC
 
   end
 
   def search_stock_menu
-    input = nil
-    list_menu
-      while input != 'x'
-        input = gets.strip.downcase
-        case input
+    @input = nil
+    list_stock_search_menu
+      while @input != 'x'
+        @input = gets.strip.downcase
+        case @input
         when "m"
-          list_menu
+          main_menu
         when "1"
-          puts "Most Popular Stocks"
-          options
+          puts "Current Price / Today's Change / 52-Week Range / Year-to-Date Change"
+          stock_search_options
         when "2"
-          puts "Key Stats"
-          options
+          puts "Today's Trading Information"
+          stock_search_options
         when "3"
-          puts "World Markets"
-          options
+          puts "Growth & Valuation"
+          stock_search_options
         when "4"
-          puts "Gainers"
-          options
+          puts "Competitors"
+          stock_search_options
         when "5"
-          puts "Losers"
-          options
+          puts "Financials"
+          stock_search_options
         when "6"
-          puts "Sector Performance"
-          options
+          puts "Profile"
+          stock_search_options
         when "7"
-          puts "Commodities"
-          options
+          puts "Company Description"
+          stock_search_options
         when "8"
-          puts "How stocks are doing this year"
-          options
+          puts ""
+          stock_search_options
         when "9"
-          puts "Search by Stock Symbol"
-          puts "Type in the Stock Symbol for the Company you are looking for:"
+          puts ""
+          stock_search_options
+        when "10"
+          puts ""
         when "x"
 
         end
+  end
 
-    main_menu
+  def search_stock_options
+    puts "Enter a number (1-10) from the company stock menu | 'm' to view main menu | 'b' to go to company stock menu | 'x' to exit"
   end
 end
 
