@@ -16,15 +16,16 @@ class StockMarketFacts::CLI
     ::: MAIN MENU :::
 
     What would you like to view about the market?
-      1. Most Popular Stocks
-      2. Key Stats
-      3. World Markets
-      4. Gainers
-      5. Losers
-      6. Sector Performance
-      7. Commodities
-      8. How stocks are doing this year
-      9. Search by Stock Symbol
+      [1] Most Popular Stocks
+      [2] Key Stats
+      [3] World Markets *Coming Soon*
+      [4] Gainers
+      [5] Losers
+      [6] Sector Performance *Coming Soon*
+      [7] Commodities
+      [8] How stocks are doing this year
+      [s] Search by Stock Symbol
+      [x] Exit Program
 
     DOC
 
@@ -32,7 +33,10 @@ class StockMarketFacts::CLI
 
   def options
     puts ""
-    puts "Enter a number (1-9) from the main menu | 'm' to view menu again | 'x' to exit".colorize( :gray )
+    puts "[1-8] from the main menu options".colorize( :gray )
+    puts "[s] to search by Stock Symbol"
+    puts "[m] to view menu again".colorize( :gray )
+    puts "[x] to exit".colorize( :gray )
   end
 
   def main_menu
@@ -109,7 +113,7 @@ class StockMarketFacts::CLI
         puts ""
         market.print_ytd_stock_performance
         options
-      when "9"
+      when "s"
         puts ""
         puts ""
         puts ""
@@ -118,6 +122,64 @@ class StockMarketFacts::CLI
         puts "Type in the Stock Symbol for the Company you are looking for:"
         search_stock_menu
       when "x"
+
+      when "a"
+        puts ""
+        puts ""
+        puts ""
+        puts "::: Most Popular Stocks :::".colorize( :blue )
+        puts ""
+        market.print_popular_stocks
+
+        puts ""
+        puts ""
+        puts ""
+        puts "::: Key Stats :::".colorize( :blue )
+        puts ""
+        market.print_key_stats
+
+        puts ""
+        puts ""
+        puts ""
+        puts "::: World Markets :::".colorize( :blue )
+        puts ""
+        puts "Coming Soon..."
+
+        puts ""
+        puts ""
+        puts ""
+        puts "::: Gainers :::".colorize( :blue )
+        puts ""
+        market.print_gainers
+
+        puts ""
+        puts ""
+        puts ""
+        puts "::: Losers :::".colorize( :blue )
+        puts ""
+        market.print_losers
+
+        puts ""
+        puts ""
+        puts ""
+        puts "::: Sector Performance :::".colorize( :blue )
+        puts ""
+        puts "Coming Soon..."
+
+        puts ""
+        puts ""
+        puts ""
+        puts "::: Commodities :::".colorize( :blue )
+        puts ""
+        market.print_commodities
+
+        puts ""
+        puts ""
+        puts ""
+        puts "::: How stocks are doing this year :::".colorize( :blue )
+        puts ""
+        market.print_ytd_stock_performance
+        options
 
       else
         puts ""
@@ -146,16 +208,18 @@ class StockMarketFacts::CLI
     ::: #{@company_name} STOCK MENU :::
 
     What would you like to know about #{@company_name}?
-      1. Current Price / Today's Change / Year-to-Date Change
-      2. Today's Trading Information
-      3. Growth & Valuation
-      4. Competitors
-      5. Financials
-      6. Profile
-      7. Company Description
-      8. Company Contact Information
-      9. Shareholders
-      10. Top Executives
+      [1] Current Price / Today's Change / Year-to-Date Change
+      [2] Today's Trading Information
+      [3] Growth & Valuation
+      [4] Competitors
+      [5] Financials
+      [6] Profile
+      [7] Company Description
+      [8] Company Contact Information
+      [9] Shareholders
+      [10] Top Executives *Coming Soon*
+      [x] Exit Program
+
 
     DOC
 
@@ -164,7 +228,10 @@ class StockMarketFacts::CLI
   #print simple instructions in second level cli
   def search_stock_options
     puts ""
-    puts "Enter a number (1-10) from the company stock menu | 'm' to view main menu | 'b' to go to company stock menu | 'x' to exit".colorize( :gray )
+    puts "[1-10] from the company menu options".colorize( :gray )
+    puts "[m] to view menu again".colorize( :gray )
+    puts "[b] to view company menu again".colorize( :gray )
+    puts "[x] to exit".colorize( :gray )
   end
 
   #second level cli
@@ -282,6 +349,78 @@ class StockMarketFacts::CLI
         company.print_top_executives(@company_symbol)
         search_stock_options
       when "x"
+
+      when "a"
+        puts ""
+        puts ""
+        puts ""
+        puts "::: #{@company_name} - Quick Facts :::".colorize( :blue )
+        puts ""
+        company.print_simple_performance(@company_symbol)
+
+        puts ""
+        puts ""
+        puts ""
+        puts "::: #{@company_name} - Today's Trading Information :::".colorize( :blue )
+        puts ""
+        company.print_today_trading(@company_symbol)
+
+        puts ""
+        puts ""
+        puts ""
+        puts "::: #{@company_name} - Growth & Valuation :::".colorize( :blue )
+        puts ""
+        company.print_growth(@company_symbol)
+
+        puts ""
+        puts ""
+        puts ""
+        puts "::: #{@company_name} - Competitors :::".colorize( :blue )
+        puts ""
+        company.print_competitors(@company_symbol)
+
+        puts ""
+        puts ""
+        puts ""
+        puts "::: #{@company_name} - Financials :::".colorize( :blue )
+        puts ""
+        company.print_financials(@company_symbol)
+
+        puts ""
+        puts ""
+        puts ""
+        puts "::: #{@company_name} - Profile :::".colorize( :blue )
+        puts ""
+        company.print_profile_info(@company_symbol)
+
+        puts ""
+        puts ""
+        puts ""
+        puts "::: #{@company_name} - Company Description :::".colorize( :blue )
+        puts ""
+        company.print_company_description(@company_symbol)
+
+        puts ""
+        puts ""
+        puts ""
+        puts "::: #{@company_name} - Company Contact Information :::".colorize( :blue )
+        puts ""
+        company.print_company_contact_info(@company_symbol)
+
+        puts ""
+        puts ""
+        puts ""
+        puts "::: #{@company_name} - Shareholders :::".colorize( :blue )
+        puts ""
+        company.print_shareholders(@company_symbol)
+
+        puts ""
+        puts ""
+        puts ""
+        puts "::: #{@company_name} - Top Executives :::".colorize( :blue )
+        puts ""
+        company.print_top_executives(@company_symbol)
+        search_stock_options
 
       else
         puts ""
