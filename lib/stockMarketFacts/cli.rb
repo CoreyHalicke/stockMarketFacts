@@ -27,13 +27,14 @@ class StockMarketFacts::CLI
   end
 
   def options
+    puts ""
     puts "Enter a number (1-9) from the main menu | 'm' to view menu again | 'x' to exit"
   end
 
   def main_menu
   @input = nil
   list_menu
-  StockMarketFacts::Market.market_scrape
+  market = StockMarketFacts::Market.new
 
     while @input != 'x'
       @input = gets.strip.downcase
@@ -41,38 +42,51 @@ class StockMarketFacts::CLI
       when "m"
         list_menu
       when "1"
-        puts "Most Popular Stocks"
-        StockMarketFacts::Market.popular_stocks
+        puts ""
+        puts "::: Most Popular Stocks :::"
+        market.print_popular_stocks
         options
       when "2"
-        puts "Key Stats"
-        StockMarketFacts::Market.key_stats
+        puts ""
+        puts "::: Key Stats :::"
+        market.print_key_stats
         options
       when "3"
-        puts "World Markets"
+        puts ""
+        puts "::: World Markets :::"
+        puts "Coming Soon..."
         options
       when "4"
-        puts "Gainers"
+        puts ""
+        puts "::: Gainers :::"
+        market.print_gainers
         options
       when "5"
-        puts "Losers"
+        puts ""
+        puts "::: Losers :::"
+        market.print_losers
         options
       when "6"
-        puts "Sector Performance"
+        puts ""
+        puts "::: Sector Performance :::"
         options
       when "7"
-        puts "Commodities"
+        puts ""
+        puts "::: Commodities :::"
         options
       when "8"
-        puts "How stocks are doing this year"
+        puts ""
+        puts "::: How stocks are doing this year :::"
         options
       when "9"
-        puts "Search by Stock Symbol"
+        puts ""
+        puts "::: Search by Stock Symbol :::"
         puts "Type in the Stock Symbol for the Company you are looking for:"
         search_stock_menu
       when "x"
 
       else
+        puts ""
         puts "Not sure what you want, please pick an option from the menu."
         list_menu
       end
@@ -107,6 +121,7 @@ class StockMarketFacts::CLI
   end
 
   def search_stock_options
+    puts ""
     puts "Enter a number (1-10) from the company stock menu | 'm' to view main menu | 'b' to go to company stock menu | 'x' to exit"
   end
 
