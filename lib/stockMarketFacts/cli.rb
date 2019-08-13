@@ -108,7 +108,7 @@ class StockMarketFacts::CLI
     ::: #{@company_symbol} STOCK MENU :::
 
     What would you like to know about #{@company_symbol}?
-      1. Current Price / Today's Change / 52-Week Range / Year-to-Date Change
+      1. Current Price / Today's Change / Year-to-Date Change
       2. Today's Trading Information
       3. Growth & Valuation
       4. Competitors
@@ -131,7 +131,7 @@ class StockMarketFacts::CLI
   def search_stock_menu
     @input = nil
     @company_symbol = gets.strip.upcase
-
+    market = StockMarketFacts::Company.new(@company_symbol)
     list_stock_search_menu
     while @input != 'x'
       @input = gets.strip.downcase
@@ -141,13 +141,16 @@ class StockMarketFacts::CLI
       when "b"
         list_stock_search_menu
       when "1"
-        puts "Current Price / Today's Change / 52-Week Range / Year-to-Date Change"
+        puts "Current Price / Today's Change / Year-to-Date Change"
+        market.print_simple_performance
         search_stock_options
       when "2"
         puts "Today's Trading Information"
+        market.print_today_trading
         search_stock_options
       when "3"
         puts "Growth & Valuation"
+        market.print_growth
         search_stock_options
       when "4"
         puts "Competitors"
