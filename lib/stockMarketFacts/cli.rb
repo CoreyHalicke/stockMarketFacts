@@ -143,9 +143,9 @@ class StockMarketFacts::CLI
   def list_stock_search_menu
     puts <<-DOC
 
-    ::: #{@company_symbol} STOCK MENU :::
+    ::: #{@company_name} STOCK MENU :::
 
-    What would you like to know about #{@company_symbol}?
+    What would you like to know about #{@company_name}?
       1. Current Price / Today's Change / Year-to-Date Change
       2. Today's Trading Information
       3. Growth & Valuation
@@ -181,6 +181,7 @@ class StockMarketFacts::CLI
       quote_doc = company.pull_quote_data(@company_symbol)
     end
 
+    @company_name = quote_doc.css("h1").text
 
     list_stock_search_menu
     while @input != 'x'
@@ -195,7 +196,7 @@ class StockMarketFacts::CLI
         puts ""
         puts ""
         puts ""
-        puts "::: #{@company_symbol}: Quick Facts :::".colorize( :blue )
+        puts "::: #{@company_name} - Quick Facts :::".colorize( :blue )
         puts ""
         company.print_simple_performance(@company_symbol)
         search_stock_options
@@ -204,7 +205,7 @@ class StockMarketFacts::CLI
         puts ""
         puts ""
         puts ""
-        puts "::: #{@company_symbol}: Today's Trading Information :::".colorize( :blue )
+        puts "::: #{@company_name} - Today's Trading Information :::".colorize( :blue )
         puts ""
         company.print_today_trading(@company_symbol)
         search_stock_options
@@ -213,7 +214,7 @@ class StockMarketFacts::CLI
         puts ""
         puts ""
         puts ""
-        puts "::: #{@company_symbol}: Growth & Valuation :::".colorize( :blue )
+        puts "::: #{@company_name} - Growth & Valuation :::".colorize( :blue )
         puts ""
         company.print_growth(@company_symbol)
         search_stock_options
@@ -222,7 +223,7 @@ class StockMarketFacts::CLI
         puts ""
         puts ""
         puts ""
-        puts "::: #{@company_symbol}: Competitors :::".colorize( :blue )
+        puts "::: #{@company_name} - Competitors :::".colorize( :blue )
         puts ""
         company.print_competitors(@company_symbol)
         search_stock_options
@@ -231,7 +232,7 @@ class StockMarketFacts::CLI
         puts ""
         puts ""
         puts ""
-        puts "::: #{@company_symbol}: Financials :::".colorize( :blue )
+        puts "::: #{@company_name} - Financials :::".colorize( :blue )
         puts ""
         company.print_financials(@company_symbol)
         search_stock_options
@@ -240,7 +241,7 @@ class StockMarketFacts::CLI
         puts ""
         puts ""
         puts ""
-        puts "::: #{@company_symbol}: Profile :::".colorize( :blue )
+        puts "::: #{@company_name} - Profile :::".colorize( :blue )
         puts ""
         company.print_profile_info(@company_symbol)
         search_stock_options
@@ -249,7 +250,7 @@ class StockMarketFacts::CLI
         puts ""
         puts ""
         puts ""
-        puts "::: #{@company_symbol}: Company Description :::".colorize( :blue )
+        puts "::: #{@company_name} - Company Description :::".colorize( :blue )
         puts ""
         company.print_company_description(@company_symbol)
         search_stock_options
@@ -258,7 +259,7 @@ class StockMarketFacts::CLI
         puts ""
         puts ""
         puts ""
-        puts "::: #{@company_symbol}: Company Contact Information :::".colorize( :blue )
+        puts "::: #{@company_name} - Company Contact Information :::".colorize( :blue )
         puts ""
         company.print_company_contact_info(@company_symbol)
         search_stock_options
@@ -267,7 +268,7 @@ class StockMarketFacts::CLI
         puts ""
         puts ""
         puts ""
-        puts "::: #{@company_symbol}: Shareholders :::".colorize( :blue )
+        puts "::: #{@company_name} - Shareholders :::".colorize( :blue )
         puts ""
         company.print_shareholders(@company_symbol)
         search_stock_options
@@ -276,7 +277,7 @@ class StockMarketFacts::CLI
         puts ""
         puts ""
         puts ""
-        puts "::: #{@company_symbol}: Top Executives :::".colorize( :blue )
+        puts "::: #{@company_name} - Top Executives :::".colorize( :blue )
         puts ""
         company.print_top_executives(@company_symbol)
         search_stock_options

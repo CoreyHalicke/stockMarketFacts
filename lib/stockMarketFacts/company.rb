@@ -121,11 +121,37 @@ class StockMarketFacts::Company
     pull_quote_data(company_symbol)
 
       #find data
+      competitors1 = @quote_doc.css("div.clearfix.wsod_DataColumnLeft")[1]
+      competitors2 = competitors1.css("tr")
+      date_container = @quote_doc.css("div.clearfix.wsod_quoteDetails.wsod_containerSpacing")
+      @last_update_today_trading_and_growth = date_container.css("div.wsod_fRight")[0].text
 
       #add data to array
+      counter = 1
+      competitors2.each do |x|
+        if counter == 1
+          counter += 1
+        else
+
+          counter += 1
+          symbol = x.css("a.wsod_symbol").text
+          title = x.css("span")[0].text
+          todays_change = x.css("span")[1].text
+          todays_percent_change = x.css("span")[2].text
+
+          @competitors << [symbol, title, todays_change, todays_percent_change]
+        end
+      end
 
       #print data to terminal
-      puts "Coming Soon..."
+      @competitors.each do |item|
+        line_break
+        puts "#{item[0].colorize( :blue )} - #{item[1].colorize( :blue )} =>"
+        puts "Today's Change: #{item[2].colorize( :blue )} | Today's Percent Change: #{item[3].colorize( :blue )}"
+      end
+      line_break
+      puts @last_update_today_trading_and_growth
+      line_break
   end
 
   #clear, pull updated data, store data, print data
@@ -134,11 +160,26 @@ class StockMarketFacts::Company
     pull_quote_data(company_symbol)
 
     #find data
+    financials1 = @quote_doc.css("div.clearfix.wsod_DataColumnRight")[1]
+    financials2 = financials1.css("tr")
+    date_container = @quote_doc.css("div.clearfix.wsod_quoteDetails.wsod_containerSpacing")
+    @last_update_today_trading_and_growth = date_container.css("div.wsod_fRight")[0].text
 
     #add data to array
+    financials2.each do |x|
+      title = x.css("td")[0].text
+      data = x.css("td")[1].text
+      @financials << [title, data]
+    end
 
     #print data to terminal
-    puts "Coming Soon..."
+    @financials.each do |item|
+      line_break
+      puts "#{item[0]} => #{item[1].colorize( :blue )}"
+    end
+    line_break
+    puts @last_update_today_trading_and_growth
+    line_break
   end
 
   #clear, pull updated data, store data, print data
@@ -147,11 +188,24 @@ class StockMarketFacts::Company
     pull_quote_data(company_symbol)
 
     #find data
+    profile_info1 = @quote_doc.css("div.clearfix.wsod_DataColumnLeft")[2]
+    profile_info2 = profile_info1.css("tr")
+    date_container = @quote_doc.css("div.clearfix.wsod_quoteDetails.wsod_containerSpacing")
+    @last_update_today_trading_and_growth = date_container.css("div.wsod_fRight")[0].text
 
     #add data to array
+    profile_info2.each do |x|
+      title = x.css("div.wsod_fLeft").text
+      data = x.css("div.wsod_fRight.wsod_bold").text
+      @profile_info << [title, data]
+    end
 
     #print data to terminal
-    puts "Coming Soon..."
+    @profile_info.each do |item|
+      line_break
+      puts "#{item[0]} => #{item[1].colorize( :blue )}"
+    end
+    line_break
   end
 
   #clear, pull updated data, store data, print data
@@ -160,11 +214,16 @@ class StockMarketFacts::Company
     pull_profile_data(company_symbol)
 
     #find data
+    company_description = @profile_doc.css("div#wsod_companyDescription").text
+
 
     #add data to array
+    line_break
+    @company_description << company_description
+    line_break
 
     #print data to terminal
-    puts "Coming Soon..."
+    puts @company_description[0]
   end
 
   #clear, pull updated data, store data, print data
@@ -173,11 +232,42 @@ class StockMarketFacts::Company
     pull_profile_data(company_symbol)
 
     #find data
+    company_contact1 = @profile_doc.css("div.wsod_companyContactInfo.wsod_companyNameStreet")
+    company_contact2 = @profile_doc.css("div.wsod_companyContactInfo.wsod_companyPhoneURL")
+    title = ""
+    street_address = ""
+    street_address2 = ""
+    phone = ""
+    phone1 = ""
+    phone2 = ""
+    website = ""
 
     #add data to array
+    company_contact1.each do |x|
+      title = x.css("div")[0].text
+      street_address = x.css("div")[1].text
+      street_address2 = x.css("div")[2].text
+    end
+
+    company_contact2.each do |x|
+      phone = x.css("div")[0].text
+      phone1 = x.css("div")[1].text
+      website = x.css("div")[2].text
+    end
+    @company_contact << [title, street_address, street_address2, phone, phone1, website]
 
     #print data to terminal
-    puts "Coming Soon..."
+    line_break
+    @company_contact.each do |item|
+      puts "#{item[0].colorize( :blue )}"
+      puts "#{item[1]}"
+      puts "#{item[2]}"
+      puts "#{item[3]}"
+      puts "#{item[4]}"
+      puts "#{item[5]}"
+    end
+    line_break
+
   end
 
   #clear, pull updated data, store data, print data
@@ -186,11 +276,23 @@ class StockMarketFacts::Company
     pull_profile_data(company_symbol)
 
     #find data
+    shareholders = @profile_doc.css("table.wsod_dataTableSmallNoBorder")
+    shareholders2 = shareholders.css("tr")
 
     #add data to array
+    shareholders2.each do |x|
+      name = x.css("td")[0].text
+      percent = x.css("td")[1].text
+      @shareholders << [name, percent]
+    end
+
 
     #print data to terminal
-    puts "Coming Soon..."
+    @shareholders.each do |item|
+      line_break
+      puts "#{item[0].colorize( :blue )}:  #{item[1]}"
+    end
+    line_break
   end
 
   #clear, pull updated data, store data, print data
