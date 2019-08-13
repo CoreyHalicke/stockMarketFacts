@@ -24,6 +24,7 @@ class StockMarketFacts::CLI
       [6] Sector Performance *Coming Soon*
       [7] Commodities
       [8] How stocks are doing this year
+      [a] to run all
       [s] Search by Stock Symbol
       [x] Exit Program
 
@@ -34,6 +35,7 @@ class StockMarketFacts::CLI
   def options
     puts ""
     puts "[1-8] from the main menu options".colorize( :gray )
+    puts "[a] to run all"
     puts "[s] to search by Stock Symbol"
     puts "[m] to view menu again".colorize( :gray )
     puts "[x] to exit".colorize( :gray )
@@ -218,6 +220,7 @@ class StockMarketFacts::CLI
       [8] Company Contact Information
       [9] Shareholders
       [10] Top Executives *Coming Soon*
+      [a] to run all
       [x] Exit Program
 
 
@@ -229,6 +232,7 @@ class StockMarketFacts::CLI
   def search_stock_options
     puts ""
     puts "[1-10] from the company menu options".colorize( :gray )
+    puts "[a] to run all"
     puts "[m] to view menu again".colorize( :gray )
     puts "[b] to view company menu again".colorize( :gray )
     puts "[x] to exit".colorize( :gray )

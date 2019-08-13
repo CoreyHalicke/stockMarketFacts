@@ -218,12 +218,12 @@ class StockMarketFacts::Company
 
 
     #add data to array
-    line_break
     @company_description << company_description
-    line_break
 
     #print data to terminal
+    line_break
     puts @company_description[0]
+    line_break
   end
 
   #clear, pull updated data, store data, print data
