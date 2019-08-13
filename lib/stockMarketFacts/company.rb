@@ -141,6 +141,73 @@ class StockMarketFacts::Company
     puts "Coming Soon..."
   end
 
+  #clear, pull updated data, store data, print data
+  def print_profile_info(company_symbol)
+    clear_data
+    pull_quote_data(company_symbol)
+
+    #find data
+
+    #add data to array
+
+    #print data to terminal
+    puts "Coming Soon..."
+  end
+
+  #clear, pull updated data, store data, print data
+  def print_company_description(company_symbol)
+    clear_data
+    pull_profile_data(company_symbol)
+
+    #find data
+
+    #add data to array
+
+    #print data to terminal
+    puts "Coming Soon..."
+  end
+
+  #clear, pull updated data, store data, print data
+  def print_company_contact_info(company_symbol)
+    clear_data
+    pull_profile_data(company_symbol)
+
+    #find data
+
+    #add data to array
+
+    #print data to terminal
+    puts "Coming Soon..."
+  end
+
+  #clear, pull updated data, store data, print data
+  def print_shareholders(company_symbol)
+    clear_data
+    pull_profile_data(company_symbol)
+
+    #find data
+
+    #add data to array
+
+    #print data to terminal
+    puts "Coming Soon..."
+  end
+
+  #clear, pull updated data, store data, print data
+  def print_top_executives(company_symbol)
+    clear_data
+    pull_profile_data(company_symbol)
+
+    #find data
+
+    #add data to array
+
+    #print data to terminal
+    puts "Coming Soon..."
+  end
+
+
+
 
 
 

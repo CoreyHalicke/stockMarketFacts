@@ -174,6 +174,10 @@ class StockMarketFacts::CLI
     @input = nil
     @company_symbol = gets.strip.upcase
     company = StockMarketFacts::Company.new(@company_symbol)
+    #needs to validate stock symbol input
+
+
+
     list_stock_search_menu
     while @input != 'x'
       @input = gets.strip.downcase
@@ -234,7 +238,7 @@ class StockMarketFacts::CLI
         puts ""
         puts "::: #{@company_symbol}: Profile :::".colorize( :blue )
         puts ""
-        puts "Coming Soon..."
+        company.print_profile_info(@company_symbol)
         search_stock_options
       when "7"
         ### profile url
@@ -243,7 +247,7 @@ class StockMarketFacts::CLI
         puts ""
         puts "::: #{@company_symbol}: Company Description :::".colorize( :blue )
         puts ""
-        puts "Coming Soon..."
+        company.print_company_description(@company_symbol)
         search_stock_options
       when "8"
         ### profile url
@@ -252,7 +256,7 @@ class StockMarketFacts::CLI
         puts ""
         puts "::: #{@company_symbol}: Company Contact Information :::".colorize( :blue )
         puts ""
-        puts "Coming Soon..."
+        company.print_company_contact_info(@company_symbol)
         search_stock_options
       when "9"
         ### profile url
@@ -261,7 +265,7 @@ class StockMarketFacts::CLI
         puts ""
         puts "::: #{@company_symbol}: Shareholders :::".colorize( :blue )
         puts ""
-        puts "Coming Soon..."
+        company.print_shareholders(@company_symbol)
         search_stock_options
       when "10"
         ### profile url
@@ -270,7 +274,7 @@ class StockMarketFacts::CLI
         puts ""
         puts "::: #{@company_symbol}: Top Executives :::".colorize( :blue )
         puts ""
-        puts "Coming Soon..."
+        company.print_top_executives(@company_symbol)
         search_stock_options
       when "x"
 
