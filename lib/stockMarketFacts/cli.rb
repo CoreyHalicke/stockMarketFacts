@@ -4,7 +4,7 @@ class StockMarketFacts::CLI
     puts "Welcome to Quick Stock Market Facts!"
 
     main_menu
-    # goodbye
+    goodbye
   end
 
   def list_menu
@@ -24,6 +24,7 @@ class StockMarketFacts::CLI
       9. Search by Stock Symbol
 
     DOC
+
   end
 
   def options
@@ -40,7 +41,7 @@ class StockMarketFacts::CLI
       @input = gets.strip.downcase
       case @input
       when "m"
-        list_menu
+        main_menu
       when "1"
         puts ""
         puts "::: Most Popular Stocks :::"
@@ -98,6 +99,7 @@ class StockMarketFacts::CLI
 
 
   def goodbye
+    puts ""
     puts "Thank you for using Quick Stock Market Facts!"
     puts "See you soon!"
   end
@@ -131,7 +133,7 @@ class StockMarketFacts::CLI
   def search_stock_menu
     @input = nil
     @company_symbol = gets.strip.upcase
-    market = StockMarketFacts::Company.new(@company_symbol)
+    company = StockMarketFacts::Company.new(@company_symbol)
     list_stock_search_menu
     while @input != 'x'
       @input = gets.strip.downcase
@@ -141,41 +143,60 @@ class StockMarketFacts::CLI
       when "b"
         list_stock_search_menu
       when "1"
-        puts "Current Price / Today's Change / Year-to-Date Change"
-        market.print_simple_performance
+        ### quote url
+        company.print_simple_performance
         search_stock_options
       when "2"
-        puts "Today's Trading Information"
-        market.print_today_trading
+        ### quote url
+        puts ""
+        puts "::: Today's Trading Information :::"
+        company.print_today_trading
         search_stock_options
       when "3"
-        puts "Growth & Valuation"
-        market.print_growth
+        ### quote url
+        puts ""
+        puts "::: Growth & Valuation :::"
+        company.print_growth
         search_stock_options
       when "4"
-        puts "Competitors"
+        ### quote url
+        puts ""
+        puts "::: Competitors :::"
         search_stock_options
       when "5"
-        puts "Financials"
+        ### quote url
+        puts ""
+        puts "::: Financials :::"
         search_stock_options
       when "6"
-        puts "Profile"
+        ### quote url
+        puts ""
+        puts "::: Profile :::"
         search_stock_options
       when "7"
-        puts "Company Description"
+        ### profile url
+        puts ""
+        puts "::: Company Description :::"
         search_stock_options
       when "8"
-        puts "Company Contact Information"
+        ### profile url
+        puts ""
+        puts "::: Company Contact Information :::"
         search_stock_options
       when "9"
-        puts "Shareholders"
+        ### profile url
+        puts ""
+        puts "::: Shareholders :::"
         search_stock_options
       when "10"
-        puts "Top Executives"
+        ### profile url
+        puts ""
+        puts "::: Top Executives :::"
         search_stock_options
       when "x"
 
       else
+        puts ""
         puts "Not sure what you want, please pick an option from the menu."
         list_stock_search_menu
       end

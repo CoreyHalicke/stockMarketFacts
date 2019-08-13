@@ -26,24 +26,11 @@ class StockMarketFacts::Company
 
     #fill simple performance
     current_price = quote_doc.css("td.wsod_last span")[0].text
-    if quote_doc.css("td.wsod_change span.negData")[0].text != ""
-      todays_change_dollar = quote_doc.css("td.wsod_change span.negData")[0].text
-    elsif quote_doc.css("td.wsod_change span.posData")[1].text != ""
-      todays_change_dollar = quote_doc.css("td.wsod_change span.posData")[0].text
-    end
-
-    if quote_doc.css("td.wsod_change span.negData")[1].text != ""
-      todays_change_percent = quote_doc.css("td.wsod_change span.negData")[1].text
-    elsif quote_doc.css("td.wsod_change span.posData")[1].text
-      todays_change_percent = quote_doc.css("td.wsod_change span.posData")[1].text
-    end
-
-    if quote_doc.css("td.wsod_ytd span.negData").text != ""
-      ytd_change = quote_doc.css("td.wsod_ytd span.negData").text
-    elsif quote_doc.css("td.wsod_ytd span.posData").text != ""
-      ytd_change = quote_doc.css("td.wsod_ytd span.posData").text
-    end
-    @simple_performace << [current_price, todays_change_dollar, todays_change_percent, ytd_change]
+    todays_change_dollar = quote_doc.css("td.wsod_change span")[1].text
+    todays_change_percent = quote_doc.css("td.wsod_change span")[2].text
+    ytd_change = quote_doc.css("td.wsod_ytd span").text
+    simple_performace_last_updated = quote_doc.css("td.wsod_last span")[1].text
+    @simple_performace << [current_price, todays_change_dollar, todays_change_percent, ytd_change, simple_performace_last_updated]
 
 
     #fill today's trading info
@@ -75,7 +62,7 @@ class StockMarketFacts::Company
 
   def print_simple_performance
     @simple_performace.each do |item|
-      puts "Price: #{item[0]} | Today's Dollar Change: #{item[1]} | Today's Percent Change: #{item[2]} | YTD Change #{item[3]}"
+      puts "Price: #{item[0]} | Today's Dollar Change: #{item[1]} | Today's Percent Change: #{item[2]} | YTD Change #{item[3]} | Last Updated: #{item[4]}"
     end
   end
 
