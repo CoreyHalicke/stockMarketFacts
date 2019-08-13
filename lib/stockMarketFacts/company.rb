@@ -46,13 +46,13 @@ class StockMarketFacts::Company
     #print data to terminal
     @simple_performace.each do |item|
       line_break
-      puts "Price: #{item[0]}"
+      puts "Price: #{item[0].colorize( :blue )}"
       line_break
-      puts "Today's Dollar Change: #{item[1]}"
+      puts "Today's Dollar Change: #{item[1].colorize( :blue )}"
       line_break
-      puts "Today's Percent Change: #{item[2]}"
+      puts "Today's Percent Change: #{item[2].colorize( :blue )}"
       line_break
-      puts "YTD Change #{item[3]}"
+      puts "YTD Change #{item[3].colorize( :blue )}"
       line_break
       puts "Last Updated: #{item[4]}"
     end
@@ -80,7 +80,7 @@ class StockMarketFacts::Company
     #print data to terminal
     @today_trading.each do |item|
       line_break
-      puts "#{item[0]} => #{item[1]}"
+      puts "#{item[0]} => #{item[1].colorize( :blue )}"
     end
     line_break
     puts @last_update_today_trading_and_growth
@@ -108,12 +108,43 @@ class StockMarketFacts::Company
     #print data to terminal
     @growth.each do |item|
       line_break
-      puts "#{item[0]} => #{item[1]}"
+      puts "#{item[0]} => #{item[1].colorize( :blue )}"
     end
     line_break
     puts @last_update_today_trading_and_growth
     line_break
   end
+
+  #clear, pull updated data, store data, print data
+  def print_competitors(company_symbol)
+    clear_data
+    pull_quote_data(company_symbol)
+
+      #find data
+
+      #add data to array
+
+      #print data to terminal
+      puts "Coming Soon..."
+  end
+
+  #clear, pull updated data, store data, print data
+  def print_financials(company_symbol)
+    clear_data
+    pull_quote_data(company_symbol)
+
+    #find data
+
+    #add data to array
+
+    #print data to terminal
+    puts "Coming Soon..."
+  end
+
+
+
+
+
 
   def line_break
     puts "---------------------------------------------------------------"
@@ -132,7 +163,6 @@ class StockMarketFacts::Company
     @shareholders = []
     @top_executives = []
   end
-
 
 end
 

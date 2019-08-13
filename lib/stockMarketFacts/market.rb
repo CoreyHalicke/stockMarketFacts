@@ -91,7 +91,7 @@ class StockMarketFacts::Market
   def print_popular_stocks
     @popular_stocks.each do |stock|
       line_break
-      puts "#{stock[0]} | Current Price: #{stock[1]} | Change: #{stock[2]}"
+      puts "Name: #{stock[0].colorize( :blue )} | Current Price: #{stock[1].colorize( :blue )} | Change: #{stock[2].colorize( :blue )}"
     end
     line_break
   end
@@ -99,7 +99,7 @@ class StockMarketFacts::Market
   def print_key_stats
     @key_stats.each do |stat|
       line_break
-      puts "#{stat[0]} | Current Quote: #{stat[1]} | Change: #{stat[2]}"
+      puts "Name: #{stat[0].colorize( :blue )} | Current Quote: #{stat[1].colorize( :blue )} | Change: #{stat[2].colorize( :blue )}"
     end
     line_break
   end
@@ -107,7 +107,7 @@ class StockMarketFacts::Market
   def print_gainers
     @gainers.each do |stock|
       line_break
-      puts "#{stock[0]} | Change: #{stock[1]}"
+      puts "Name: #{stock[0].colorize( :blue )} | Change: #{stock[1].colorize( :blue )}"
     end
     line_break
   end
@@ -115,7 +115,7 @@ class StockMarketFacts::Market
   def print_losers
     @losers.each do |stock|
       line_break
-      puts "#{stock[0]} | Change: #{stock[1]}"
+      puts "Name: #{stock[0].colorize( :blue )} | Change: #{stock[1].colorize( :blue )}"
     end
     line_break
   end
@@ -123,7 +123,7 @@ class StockMarketFacts::Market
   def print_commodities
     @commodities.each do |item|
       line_break
-      puts "#{item[0]} | Current Price: #{item[1]} | Change: #{item[2]}"
+      puts "Name: #{item[0].colorize( :blue )} | Current Price: #{item[1].colorize( :blue )} | Change: #{item[2].colorize( :blue )}"
     end
     line_break
   end
@@ -131,7 +131,7 @@ class StockMarketFacts::Market
   def print_ytd_stock_performance
     @ytd_stock_performance.each do |stock|
       line_break
-      puts "#{stock[0]} | Change: #{stock[1]}"
+      puts "Name: #{stock[0].colorize( :blue )} | Change: #{stock[1].colorize( :blue )}"
     end
     line_break
   end
