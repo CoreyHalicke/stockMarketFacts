@@ -69,14 +69,17 @@ class StockMarketFacts::CLI
       when "6"
         puts ""
         puts "::: Sector Performance :::"
+        puts "Coming Soon..."
         options
       when "7"
         puts ""
         puts "::: Commodities :::"
+        market.print_commodities
         options
       when "8"
         puts ""
         puts "::: How stocks are doing this year :::"
+        market.print_ytd_stock_performance
         options
       when "9"
         puts ""

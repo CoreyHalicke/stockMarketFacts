@@ -60,9 +60,30 @@ class StockMarketFacts::Market
     end
 
     #fill sector performance
-    sector_performance = doc.css("div.module-body")
+    # sector_performance = doc.css("div.module-body")
     # sector_performance.css("")
-    binding.pry
+
+    #fill commodities
+    commodities = doc.css("ul.module-body.wsod.commodities")
+    commodities.css("a.quote").each do |x|
+      name = x.css("span.column.quote-name").text
+      price = x.css("span.column.quote-dollar").text
+      change = x.css("span.column.quote-change").text
+      @commodities << [name, price, change]
+    end
+
+    #fill ytd stock performance
+    ytd_stock_performance = doc.css("ul.module-body.wsod.how-stocks-doing")
+    ytd_stock_performance.css("a.quote").each do |x|
+      name = x.css("span.column.quote-name").text
+      if x.css("span.column.quote-change.posData").text != ""
+        change = x.css("span.column.quote-change.posData").text
+      elsif x.css("span.column.quote-change.negData").text != ""
+        change = x.css("span.column.quote-change.negData").text
+      end
+      @ytd_stock_performance << [name, change]
+    end
+
 
   end
   ##### PRINT METHODS
@@ -91,6 +112,17 @@ class StockMarketFacts::Market
     end
   end
 
+  def print_commodities
+    @commodities.each do |item|
+      puts "#{item[0]} | Current Price: #{item[1]} | Change: #{item[2]}"
+    end
+  end
+
+  def print_ytd_stock_performance
+    @ytd_stock_performance.each do |stock|
+      puts "#{stock[0]} | Change: #{stock[1]}"
+    end
+  end
 
 end
 
