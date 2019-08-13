@@ -167,15 +167,19 @@ class StockMarketFacts::CLI
     puts "Enter a number (1-10) from the company stock menu | 'm' to view main menu | 'b' to go to company stock menu | 'x' to exit".colorize( :gray )
   end
 
-
-
   #second level cli
   def search_stock_menu
     @input = nil
     @company_symbol = gets.strip.upcase
     company = StockMarketFacts::Company.new(@company_symbol)
     #needs to validate stock symbol input
+    quote_doc = company.pull_quote_data(@company_symbol)
 
+    until quote_doc.css("h1").text != "Symbol not found"
+      puts "Please enter a valid Stock Symbol.".colorize( :red )
+      @company_symbol = gets.strip.upcase
+      quote_doc = company.pull_quote_data(@company_symbol)
+    end
 
 
     list_stock_search_menu
