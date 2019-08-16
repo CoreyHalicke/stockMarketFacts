@@ -14,25 +14,30 @@ class StockMarketFacts::Market
     self.pull_data
   end
 
+  ## do i want to store past data in @@all?
+
+  ##### DATA PULL #####
+
   # pull market data and store it
   def pull_data
     market_url = "https://money.cnn.com/data/markets/"
-    doc = Nokogiri::HTML(open(market_url))
+    @market_doc = Nokogiri::HTML(open(market_url))
 
-    grab_popular_stock(doc)
-    grab_key_stats(doc)
-    grab_world_market(doc)
-    grab_gainers(doc)
-    grab_losers(doc)
-    grab_sector_performance(doc)
-    grab_commodities(doc)
-    grab_ytd_stock_performance(doc)
+    grab_popular_stock
+    grab_key_stats
+    grab_world_market
+    grab_gainers
+    grab_losers
+    grab_sector_performance
+    grab_commodities
+    grab_ytd_stock_performance
   end
 
+  ##### GRAB DATA #####
 
-  def grab_popular_stock(doc)
-    #fill popular stock data
-    popular_stocks = doc.css("ul.module-body.wsod.most-popular-stocks")
+  #fill popular stock data
+  def grab_popular_stock
+    popular_stocks = @market_doc.css("ul.module-body.wsod.most-popular-stocks")
     popular_stocks.css("a.stock").each do |x|
       name = x.css("span.column.stock-name").text
       price = x.css("span.column.stock-price").text
@@ -41,9 +46,9 @@ class StockMarketFacts::Market
     end
   end
 
-  def grab_key_stats(doc)
-    #fill key stats data
-    key_stats = doc.css("ul.module-body.wsod.key-stats")
+  #fill key stats data
+  def grab_key_stats
+    key_stats = @market_doc.css("ul.module-body.wsod.key-stats")
     key_stats.css("a.quote").each do |x|
       name = x.css("span.column.quote-name").text
       quote = x.css("span.column.quote-col").text
@@ -52,18 +57,18 @@ class StockMarketFacts::Market
     end
   end
 
-  def grab_world_market(doc)
-    #fill world market data
-    world_markets = doc.css("div.module-body.wsod.world-markets")
+  #fill world market data
+  def grab_world_market
+    world_markets = @market_doc.css("div.module-body.wsod.world-markets")
     world_markets.css("a.world-market").each do |x|
       name = x.css("h3.world-market-name").text
       # figure out source
     end
   end
 
-  def grab_gainers(doc)
-    #fill gainers
-    gainers = doc.css("ul.module-body.wsod.gainers")
+  #fill gainers
+  def grab_gainers
+    gainers = @market_doc.css("ul.module-body.wsod.gainers")
     gainers.css("a.two-equal-columns.quote").each do |x|
       name = x.css("span.column.quote-name").text
       change = x.css("span.column.quote-change").text
@@ -71,9 +76,9 @@ class StockMarketFacts::Market
     end
   end
 
-  def grab_losers(doc)
-    #fill losers
-    losers = doc.css("ul.module-body.wsod.losers")
+  #fill losers
+  def grab_losers
+    losers = @market_doc.css("ul.module-body.wsod.losers")
     losers.css("a.two-equal-columns.quote").each do |x|
       name = x.css("span.column.quote-name").text
       change = x.css("span.column.quote-change").text
@@ -81,15 +86,15 @@ class StockMarketFacts::Market
     end
   end
 
-  def grab_sector_performance(doc)
-    #fill sector performance
-    # sector_performance = doc.css("div.module-body")
+  #fill sector performance
+  def grab_sector_performance
+    # sector_performance = @market_doc.css("div.module-body")
     # sector_performance.css("")
   end
 
-  def grab_commodities(doc)
-    #fill commodities
-    commodities = doc.css("ul.module-body.wsod.commodities")
+  #fill commodities
+  def grab_commodities
+    commodities = @market_doc.css("ul.module-body.wsod.commodities")
     commodities.css("a.quote").each do |x|
       name = x.css("span.column.quote-name").text
       price = x.css("span.column.quote-dollar").text
@@ -98,9 +103,9 @@ class StockMarketFacts::Market
     end
   end
 
-  def grab_ytd_stock_performance(doc)
-    #fill ytd stock performance
-    ytd_stock_performance = doc.css("ul.module-body.wsod.how-stocks-doing")
+  #fill ytd stock performance
+  def grab_ytd_stock_performance
+    ytd_stock_performance = @market_doc.css("ul.module-body.wsod.how-stocks-doing")
     ytd_stock_performance.css("a.quote").each do |x|
       name = x.css("span.column.quote-name").text
       if x.css("span.column.quote-change.posData").text != ""
@@ -167,7 +172,7 @@ class StockMarketFacts::Market
   ##### COSMETIC METHODS #####
 
   def line_break
-    puts "---------------------------------------------------------------"
+    puts "________________________________________________________________________________"
   end
 
   def clear_data

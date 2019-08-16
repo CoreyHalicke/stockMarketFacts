@@ -1,10 +1,8 @@
 class StockMarketFacts::CLI
 
   def call
-    puts ""
-    puts ""
-    puts ""
-    puts "Welcome to Quick Stock Market Facts!".blue
+    puts_blanks
+    puts "Welcome to Quick Stock Market Facts!".colorize( :blue )
 
     main_menu
     goodbye
@@ -33,7 +31,7 @@ class StockMarketFacts::CLI
   end
 
   def options
-    puts ""
+    blank
     puts "[1-8] from the main menu options".colorize( :gray )
     puts "[a] to run all"
     puts "[s] to search by Stock Symbol"
@@ -52,141 +50,105 @@ class StockMarketFacts::CLI
       when "m"
         main_menu
       when "1"
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: Most Popular Stocks :::".colorize( :blue )
-        puts ""
+        blank
         @market.print_popular_stocks
         options
       when "2"
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: Key Stats :::".colorize( :blue )
-        puts ""
+        blank
         @market.print_key_stats
         options
       when "3"
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: World Markets :::".colorize( :blue )
-        puts ""
+        blank
         puts "Coming Soon..."
         options
       when "4"
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: Gainers :::".colorize( :blue )
-        puts ""
+        blank
         @market.print_gainers
         options
       when "5"
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: Losers :::".colorize( :blue )
-        puts ""
+        blank
         @market.print_losers
         options
       when "6"
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: Sector Performance :::".colorize( :blue )
-        puts ""
+        blank
         puts "Coming Soon..."
         options
       when "7"
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: Commodities :::".colorize( :blue )
-        puts ""
+        blank
         @market.print_commodities
         options
       when "8"
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: How stocks are doing this year :::".colorize( :blue )
-        puts ""
+        blank
         @market.print_ytd_stock_performance
         options
       when "s"
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: Search by Stock Symbol :::".colorize( :blue )
-        puts ""
+        blank
         puts "Type in the Stock Symbol for the Company you are looking for:"
         search_stock_menu
       when "x"
 
       when "a"
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: Most Popular Stocks :::".colorize( :blue )
-        puts ""
+        blank
         @market.print_popular_stocks
 
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: Key Stats :::".colorize( :blue )
-        puts ""
+        blank
         @market.print_key_stats
 
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: World Markets :::".colorize( :blue )
-        puts ""
+        blank
         puts "Coming Soon..."
 
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: Gainers :::".colorize( :blue )
-        puts ""
+        blank
         @market.print_gainers
 
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: Losers :::".colorize( :blue )
-        puts ""
+        blank
         @market.print_losers
 
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: Sector Performance :::".colorize( :blue )
-        puts ""
+        blank
         puts "Coming Soon..."
 
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: Commodities :::".colorize( :blue )
-        puts ""
+        blank
         @market.print_commodities
 
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: How stocks are doing this year :::".colorize( :blue )
-        puts ""
+        blank
         @market.print_ytd_stock_performance
         options
 
       else
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "Not sure what you want, please pick an option from the menu.".colorize( :red )
         list_menu
       end
@@ -195,13 +157,11 @@ class StockMarketFacts::CLI
 
   #goodbye message when leaving app
   def goodbye
-    puts ""
-    puts ""
-    puts ""
+    puts_blanks
     puts "Thank you for using Quick Stock Market Facts!".colorize( :blue )
     puts "See you soon!".colorize( :blue )
-    puts ""
-    @market.clear_data
+    blank
+    # @market.clear_data
   end
 
   #second level cli menu
@@ -231,7 +191,7 @@ class StockMarketFacts::CLI
 
   #print simple instructions in second level cli
   def search_stock_options
-    puts ""
+    blank
     puts "[1-10] from the company menu options".colorize( :gray )
     puts "[a] to run all"
     puts "[m] to view menu again".colorize( :gray )
@@ -265,178 +225,153 @@ class StockMarketFacts::CLI
         list_stock_search_menu
       when "1"
         ### quote url
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: #{@company_name} - Quick Facts :::".colorize( :blue )
-        puts ""
+        blank
         company.print_simple_performance(@company_symbol)
         search_stock_options
       when "2"
         ### quote url
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: #{@company_name} - Today's Trading Information :::".colorize( :blue )
-        puts ""
+        blank
         company.print_today_trading(@company_symbol)
         search_stock_options
       when "3"
         ### quote url
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: #{@company_name} - Growth & Valuation :::".colorize( :blue )
-        puts ""
+        blank
         company.print_growth(@company_symbol)
         search_stock_options
       when "4"
         ### quote url
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: #{@company_name} - Competitors :::".colorize( :blue )
-        puts ""
+        blank
         company.print_competitors(@company_symbol)
         search_stock_options
       when "5"
         ### quote url
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: #{@company_name} - Financials :::".colorize( :blue )
-        puts ""
+        blank
         company.print_financials(@company_symbol)
         search_stock_options
       when "6"
         ### quote url
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: #{@company_name} - Profile :::".colorize( :blue )
-        puts ""
+        blank
         company.print_profile_info(@company_symbol)
         search_stock_options
       when "7"
         ### profile url
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: #{@company_name} - Company Description :::".colorize( :blue )
-        puts ""
+        blank
         company.print_company_description(@company_symbol)
         search_stock_options
       when "8"
         ### profile url
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: #{@company_name} - Company Contact Information :::".colorize( :blue )
-        puts ""
+        blank
         company.print_company_contact_info(@company_symbol)
         search_stock_options
       when "9"
         ### profile url
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: #{@company_name} - Shareholders :::".colorize( :blue )
-        puts ""
+        blank
         company.print_shareholders(@company_symbol)
         search_stock_options
       when "10"
         ### profile url
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: #{@company_name} - Top Executives :::".colorize( :blue )
-        puts ""
+        blank
         company.print_top_executives(@company_symbol)
         search_stock_options
       when "x"
 
       when "a"
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: #{@company_name} - Quick Facts :::".colorize( :blue )
-        puts ""
+        blank
         company.print_simple_performance(@company_symbol)
 
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: #{@company_name} - Today's Trading Information :::".colorize( :blue )
-        puts ""
+        blank
         company.print_today_trading(@company_symbol)
 
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: #{@company_name} - Growth & Valuation :::".colorize( :blue )
-        puts ""
+        blank
         company.print_growth(@company_symbol)
 
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: #{@company_name} - Competitors :::".colorize( :blue )
-        puts ""
+        blank
         company.print_competitors(@company_symbol)
 
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: #{@company_name} - Financials :::".colorize( :blue )
-        puts ""
+        blank
         company.print_financials(@company_symbol)
 
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: #{@company_name} - Profile :::".colorize( :blue )
-        puts ""
+        blank
         company.print_profile_info(@company_symbol)
 
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: #{@company_name} - Company Description :::".colorize( :blue )
-        puts ""
+        blank
         company.print_company_description(@company_symbol)
 
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: #{@company_name} - Company Contact Information :::".colorize( :blue )
-        puts ""
+        blank
         company.print_company_contact_info(@company_symbol)
 
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: #{@company_name} - Shareholders :::".colorize( :blue )
-        puts ""
+        blank
         company.print_shareholders(@company_symbol)
 
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "::: #{@company_name} - Top Executives :::".colorize( :blue )
-        puts ""
+        blank
         company.print_top_executives(@company_symbol)
         search_stock_options
 
       else
-        puts ""
-        puts ""
-        puts ""
+        puts_blanks
         puts "Not sure what you want, please pick an option from the menu.".colorize( :red )
-        puts ""
+        blank
         list_stock_search_menu
         search_stock_options
       end
     end
+  end
+
+
+  ##### COSMETIC METHODS #####
+
+
+  def puts_blanks
+    puts ""
+    puts ""
+    puts ""
+    puts ""
+    puts ""
+    puts ""
+  end
+
+  def blank
+    puts ""
   end
 
 end
