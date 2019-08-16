@@ -11,11 +11,11 @@ class StockMarketFacts::Market
     @sector_performance = []
     @commodities = []
     @ytd_stock_performance = []
-    self.fill_data
+    self.pull_data
   end
 
   # pull market data and store it
-  def fill_data
+  def pull_data
     market_url = "https://money.cnn.com/data/markets/"
     doc = Nokogiri::HTML(open(market_url))
 
@@ -168,6 +168,17 @@ class StockMarketFacts::Market
 
   def line_break
     puts "---------------------------------------------------------------"
+  end
+
+  def clear_data
+    @popular_stocks = []
+    @key_stats = []
+    @world_market = []
+    @gainers = []
+    @losers = []
+    @sector_performance = []
+    @commodities = []
+    @ytd_stock_performance = []
   end
 
 end

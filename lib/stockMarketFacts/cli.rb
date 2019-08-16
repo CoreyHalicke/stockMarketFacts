@@ -44,7 +44,7 @@ class StockMarketFacts::CLI
   def main_menu
   @input = nil
   list_menu
-  market = StockMarketFacts::Market.new
+  @market = StockMarketFacts::Market.new
 
     while @input != 'x'
       @input = gets.strip.downcase
@@ -57,7 +57,7 @@ class StockMarketFacts::CLI
         puts ""
         puts "::: Most Popular Stocks :::".colorize( :blue )
         puts ""
-        market.print_popular_stocks
+        @market.print_popular_stocks
         options
       when "2"
         puts ""
@@ -65,7 +65,7 @@ class StockMarketFacts::CLI
         puts ""
         puts "::: Key Stats :::".colorize( :blue )
         puts ""
-        market.print_key_stats
+        @market.print_key_stats
         options
       when "3"
         puts ""
@@ -81,7 +81,7 @@ class StockMarketFacts::CLI
         puts ""
         puts "::: Gainers :::".colorize( :blue )
         puts ""
-        market.print_gainers
+        @market.print_gainers
         options
       when "5"
         puts ""
@@ -89,7 +89,7 @@ class StockMarketFacts::CLI
         puts ""
         puts "::: Losers :::".colorize( :blue )
         puts ""
-        market.print_losers
+        @market.print_losers
         options
       when "6"
         puts ""
@@ -105,7 +105,7 @@ class StockMarketFacts::CLI
         puts ""
         puts "::: Commodities :::".colorize( :blue )
         puts ""
-        market.print_commodities
+        @market.print_commodities
         options
       when "8"
         puts ""
@@ -113,7 +113,7 @@ class StockMarketFacts::CLI
         puts ""
         puts "::: How stocks are doing this year :::".colorize( :blue )
         puts ""
-        market.print_ytd_stock_performance
+        @market.print_ytd_stock_performance
         options
       when "s"
         puts ""
@@ -131,14 +131,14 @@ class StockMarketFacts::CLI
         puts ""
         puts "::: Most Popular Stocks :::".colorize( :blue )
         puts ""
-        market.print_popular_stocks
+        @market.print_popular_stocks
 
         puts ""
         puts ""
         puts ""
         puts "::: Key Stats :::".colorize( :blue )
         puts ""
-        market.print_key_stats
+        @market.print_key_stats
 
         puts ""
         puts ""
@@ -152,14 +152,14 @@ class StockMarketFacts::CLI
         puts ""
         puts "::: Gainers :::".colorize( :blue )
         puts ""
-        market.print_gainers
+        @market.print_gainers
 
         puts ""
         puts ""
         puts ""
         puts "::: Losers :::".colorize( :blue )
         puts ""
-        market.print_losers
+        @market.print_losers
 
         puts ""
         puts ""
@@ -173,14 +173,14 @@ class StockMarketFacts::CLI
         puts ""
         puts "::: Commodities :::".colorize( :blue )
         puts ""
-        market.print_commodities
+        @market.print_commodities
 
         puts ""
         puts ""
         puts ""
         puts "::: How stocks are doing this year :::".colorize( :blue )
         puts ""
-        market.print_ytd_stock_performance
+        @market.print_ytd_stock_performance
         options
 
       else
@@ -201,6 +201,7 @@ class StockMarketFacts::CLI
     puts "Thank you for using Quick Stock Market Facts!".colorize( :blue )
     puts "See you soon!".colorize( :blue )
     puts ""
+    @market.clear_data
   end
 
   #second level cli menu
