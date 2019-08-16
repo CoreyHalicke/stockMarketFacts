@@ -1,6 +1,7 @@
 class StockMarketFacts::Market
 
-  attr_accessor :popular_stocks, :key_stats, :world_market, :gainers, :losers, :sector_performance, :commodities, :ytd_stock_performance
+  attr_accessor :popular_stocks, :key_stats, :world_market, :gainers, :losers, _
+  :sector_performance, :commodities, :ytd_stock_performance
 
   def initialize
     @popular_stocks = []
@@ -83,9 +84,14 @@ class StockMarketFacts::Market
       end
       @ytd_stock_performance << [name, change]
     end
-
-
   end
+
+
+
+
+
+
+
   ##### PRINT METHODS
 
   def print_popular_stocks

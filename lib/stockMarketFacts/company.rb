@@ -1,6 +1,7 @@
 class StockMarketFacts::Company
 
-  attr_accessor :simple_performace, :today_trading, :growth, :competitors, :financials, :profile_info, :company_description, :company_contact, :shareholders, :top_executives
+  attr_accessor :simple_performace, :today_trading, :growth, :competitors, _
+  :financials, :profile_info, :company_description, :company_contact, :shareholders, :top_executives
 
   #create new object for a company
   def initialize(company_symbol)
@@ -41,11 +42,17 @@ class StockMarketFacts::Company
     simple_performace_last_updated = @quote_doc.css("td.wsod_last span")[1].text
 
     #add data to array
-    @simple_performace << [current_price, todays_change_dollar, todays_change_percent, ytd_change, simple_performace_last_updated]
+    @simple_performace << [
+      current_price,
+      todays_change_dollar,
+      todays_change_percent,
+      ytd_change,
+      simple_performace_last_updated
+    ]
 
     #print data to terminal
     @simple_performace.each do |item|
-      line_break
+      binding.pry
       puts "Price: #{item[0].colorize( :blue )}"
       line_break
       puts "Today's Dollar Change: #{item[1].colorize( :blue )}"
