@@ -1,7 +1,6 @@
 class StockMarketFacts::Company
 
-  attr_accessor :simple_performace, :today_trading, :growth, :competitors, _
-  :financials, :profile_info, :company_description, :company_contact, :shareholders, :top_executives
+  attr_accessor :simple_performace, :today_trading, :growth, :competitors, :financials, :profile_info, :company_description, :company_contact, :shareholders, :top_executives
 
   #create new object for a company
   def initialize(company_symbol)
@@ -347,7 +346,7 @@ end
 
 =begin
 git add --all
-git commit -m "modified: company.rb"
+git commit -m "modified: condensing code"
 git push
 
 =end
