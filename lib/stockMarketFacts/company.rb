@@ -35,7 +35,7 @@ class StockMarketFacts::Company
 
   ##### GRAB DATA #####
 
-  def grab__simple_performance
+  def grab_simple_performance
     #find data
     current_price = @quote_doc.css("td.wsod_last span")[0].text
     todays_change_dollar = @quote_doc.css("td.wsod_change span")[1].text
@@ -192,10 +192,15 @@ class StockMarketFacts::Company
 
   ##### PRINT METHODS #####
 
+  def print_company(choice)
+    
+
+  end
+
   def print_simple_performance(company_symbol)
     clear_data
     pull_quote_data(company_symbol)
-    grab__simple_performance
+    grab_simple_performance
 
     @simple_performace.each do |item|
       line_break

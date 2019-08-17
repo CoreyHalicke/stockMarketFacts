@@ -39,6 +39,10 @@ class StockMarketFacts::CLI
     puts "[x] to exit".colorize( :gray )
   end
 
+  options = [
+    {title: , method_name:},
+  ]
+
   def main_menu
   @input = nil
   list_menu
@@ -49,72 +53,82 @@ class StockMarketFacts::CLI
       case @input
       when "m"
         main_menu
+
       when "1"
         puts_blanks
         puts "::: Most Popular Stocks :::".colorize( :blue )
         blank
-        @market.print_popular_stocks
+        @market.print_market(@market.popular_stocks)
         options
+
       when "2"
         puts_blanks
         puts "::: Key Stats :::".colorize( :blue )
         blank
-        @market.print_key_stats
+        @market.print_market(@market.key_stats)
         options
+
       when "3"
         puts_blanks
         puts "::: World Markets :::".colorize( :blue )
         blank
         puts "Coming Soon..."
         options
+
       when "4"
         puts_blanks
         puts "::: Gainers :::".colorize( :blue )
         blank
-        @market.print_gainers
+        @market.print_market(@market.gainers)
         options
+
       when "5"
         puts_blanks
         puts "::: Losers :::".colorize( :blue )
         blank
-        @market.print_losers
+        @market.print_market(@market.losers)
         options
+
       when "6"
         puts_blanks
         puts "::: Sector Performance :::".colorize( :blue )
         blank
         puts "Coming Soon..."
         options
+
       when "7"
         puts_blanks
         puts "::: Commodities :::".colorize( :blue )
         blank
-        @market.print_commodities
+        @market.print_market(@market.commodities)
         options
+
       when "8"
         puts_blanks
         puts "::: How stocks are doing this year :::".colorize( :blue )
         blank
-        @market.print_ytd_stock_performance
+        @market.print_market(@market.ytd_stock_performance)
         options
+
       when "s"
         puts_blanks
         puts "::: Search by Stock Symbol :::".colorize( :blue )
         blank
         puts "Type in the Stock Symbol for the Company you are looking for:"
         search_stock_menu
+
       when "x"
 
       when "a"
         puts_blanks
         puts "::: Most Popular Stocks :::".colorize( :blue )
         blank
-        @market.print_popular_stocks
+        @market.print_market(@market.popular_stocks)
 
         puts_blanks
         puts "::: Key Stats :::".colorize( :blue )
         blank
-        @market.print_key_stats
+        @market.print_market(@market.key_stats)
 
         puts_blanks
         puts "::: World Markets :::".colorize( :blue )
@@ -124,12 +138,13 @@ class StockMarketFacts::CLI
         puts_blanks
         puts "::: Gainers :::".colorize( :blue )
         blank
-        @market.print_gainers
+        @market.print_market(@market.gainers)
+
 
         puts_blanks
         puts "::: Losers :::".colorize( :blue )
         blank
-        @market.print_losers
+        @market.print_market(@market.losers)
 
         puts_blanks
         puts "::: Sector Performance :::".colorize( :blue )
@@ -139,12 +154,12 @@ class StockMarketFacts::CLI
         puts_blanks
         puts "::: Commodities :::".colorize( :blue )
         blank
-        @market.print_commodities
+        @market.print_market(@market.commodities)
 
         puts_blanks
         puts "::: How stocks are doing this year :::".colorize( :blue )
         blank
-        @market.print_ytd_stock_performance
+        @market.print_market(@market.ytd_stock_performance)
         options
 
       else

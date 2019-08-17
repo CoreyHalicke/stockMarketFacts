@@ -120,54 +120,18 @@ class StockMarketFacts::Market
 
   ##### PRINT METHODS #####
 
-  def print_popular_stocks
-    @popular_stocks.each do |stock|
+  def print_market(choice)
+    choice.each do |x|
       line_break
-      puts "Name: #{stock[0].colorize( :blue )} | Current Price: #{stock[1].colorize( :blue )} | Change: #{stock[2].colorize( :blue )}"
-    end
-    line_break
-  end
+      case choice
+      when @popular_stocks, @key_stats, @commodities
+        puts "Name: #{x[0].colorize( :blue )} | Currently at: #{x[1].colorize( :blue )} | Change: #{x[2].colorize( :blue )}"
 
-  def print_key_stats
-    @key_stats.each do |stat|
-      line_break
-      puts "Name: #{stat[0].colorize( :blue )} | Current Quote: #{stat[1].colorize( :blue )} | Change: #{stat[2].colorize( :blue )}"
+      when @gainers, @losers, @ytd_stock_performance
+        puts "Name: #{x[0].colorize( :blue )} | Change: #{x[1].colorize( :blue )}"
+      end
     end
-    line_break
   end
-
-  def print_gainers
-    @gainers.each do |stock|
-      line_break
-      puts "Name: #{stock[0].colorize( :blue )} | Change: #{stock[1].colorize( :blue )}"
-    end
-    line_break
-  end
-
-  def print_losers
-    @losers.each do |stock|
-      line_break
-      puts "Name: #{stock[0].colorize( :blue )} | Change: #{stock[1].colorize( :blue )}"
-    end
-    line_break
-  end
-
-  def print_commodities
-    @commodities.each do |item|
-      line_break
-      puts "Name: #{item[0].colorize( :blue )} | Current Price: #{item[1].colorize( :blue )} | Change: #{item[2].colorize( :blue )}"
-    end
-    line_break
-  end
-
-  def print_ytd_stock_performance
-    @ytd_stock_performance.each do |stock|
-      line_break
-      puts "Name: #{stock[0].colorize( :blue )} | Change: #{stock[1].colorize( :blue )}"
-    end
-    line_break
-  end
-
 
   ##### COSMETIC METHODS #####
 
