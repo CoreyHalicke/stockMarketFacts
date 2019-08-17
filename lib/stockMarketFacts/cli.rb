@@ -39,14 +39,25 @@ class StockMarketFacts::CLI
     puts "[x] to exit".colorize( :gray )
   end
 
-  options = [
-    {title: , method_name:},
-  ]
 
   def main_menu
   @input = nil
   list_menu
   @market = StockMarketFacts::Market.new
+
+  choices = [
+    {title: "Most Popular Stocks", method_name: "popular_stocks"},
+    {title: "Key Stats", method_name: "key_stats"},
+    {title: "World Markets", method_name: nil},
+    {title: "Gainers", method_name: "gainers"},
+    {title: "Losers", method_name: "losers"},
+    {title: "Sector Performance", method_name: "sector_performance"},
+    {title: "Commodities", method_name: "commodities"},
+    {title: "How stocks are doing this year", method_name: "ytd_stock_performance"}
+  ]
+
+
+
 
     while @input != 'x'
       @input = gets.strip.downcase
@@ -120,47 +131,59 @@ class StockMarketFacts::CLI
       when "x"
 
       when "a"
-        puts_blanks
-        puts "::: Most Popular Stocks :::".colorize( :blue )
-        blank
-        @market.print_market(@market.popular_stocks)
+        choices.each do |option|
+          puts "::: #{option[:title]} :::".colorize( :blue )
+          if option[:method_name]
+            @market.send("line_break")
+            @market.send("print_market(@market.#{option[:method_name]})")
+            @market.send("print_market(#{option[:method_name]})")
 
-        puts_blanks
-        puts "::: Key Stats :::".colorize( :blue )
-        blank
-        @market.print_market(@market.key_stats)
+          else
+            puts "Coming Soon..."
+          end
+        end
 
-        puts_blanks
-        puts "::: World Markets :::".colorize( :blue )
-        blank
-        puts "Coming Soon..."
-
-        puts_blanks
-        puts "::: Gainers :::".colorize( :blue )
-        blank
-        @market.print_market(@market.gainers)
-
-
-        puts_blanks
-        puts "::: Losers :::".colorize( :blue )
-        blank
-        @market.print_market(@market.losers)
-
-        puts_blanks
-        puts "::: Sector Performance :::".colorize( :blue )
-        blank
-        puts "Coming Soon..."
-
-        puts_blanks
-        puts "::: Commodities :::".colorize( :blue )
-        blank
-        @market.print_market(@market.commodities)
-
-        puts_blanks
-        puts "::: How stocks are doing this year :::".colorize( :blue )
-        blank
-        @market.print_market(@market.ytd_stock_performance)
-        options
+        # puts_blanks
+        # puts "::: Most Popular Stocks :::".colorize( :blue )
+        # blank
+        # @market.print_market(@market.popular_stocks)
+        #
+        # puts_blanks
+        # puts "::: Key Stats :::".colorize( :blue )
+        # blank
+        # @market.print_market(@market.key_stats)
+        #
+        # puts_blanks
+        # puts "::: World Markets :::".colorize( :blue )
+        # blank
+        # puts "Coming Soon..."
+        #
+        # puts_blanks
+        # puts "::: Gainers :::".colorize( :blue )
+        # blank
+        # @market.print_market(@market.gainers)
+        #
+        #
+        # puts_blanks
+        # puts "::: Losers :::".colorize( :blue )
+        # blank
+        # @market.print_market(@market.losers)
+        #
+        # puts_blanks
+        # puts "::: Sector Performance :::".colorize( :blue )
+        # blank
+        # puts "Coming Soon..."
+        #
+        # puts_blanks
+        # puts "::: Commodities :::".colorize( :blue )
+        # blank
+        # @market.print_market(@market.commodities)
+        #
+        # puts_blanks
+        # puts "::: How stocks are doing this year :::".colorize( :blue )
+        # blank
+        # @market.print_market(@market.ytd_stock_performance)
+        # options
 
       else
         puts_blanks
