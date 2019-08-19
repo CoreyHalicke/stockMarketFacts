@@ -134,13 +134,11 @@ class StockMarketFacts::CLI
         choices.each do |option|
           puts "::: #{option[:title]} :::".colorize( :blue )
           if option[:method_name]
-            @market.send("line_break")
-            @market.send("print_market(@market.#{option[:method_name]})")
-            @market.send("print_market(#{option[:method_name]})")
-
+            @market.print_market(option[:method_name])
           else
             puts "Coming Soon..."
           end
+          options
         end
 
         # puts_blanks

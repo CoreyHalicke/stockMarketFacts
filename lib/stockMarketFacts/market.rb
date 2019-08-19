@@ -121,13 +121,14 @@ class StockMarketFacts::Market
   ##### PRINT METHODS #####
 
   def print_market(choice)
-    choice.each do |x|
+    self.send(choice).each do |x|
+
       line_break
       case choice
-      when @popular_stocks, @key_stats, @commodities
+      when "popular_stocks", "key_stats", "commodities"
         puts "Name: #{x[0].colorize( :blue )} | Currently at: #{x[1].colorize( :blue )} | Change: #{x[2].colorize( :blue )}"
 
-      when @gainers, @losers, @ytd_stock_performance
+      when "gainers", "losers", "ytd_stock_performance"
         puts "Name: #{x[0].colorize( :blue )} | Change: #{x[1].colorize( :blue )}"
       end
     end
