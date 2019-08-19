@@ -1,9 +1,5 @@
 # StockMarketFacts
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/stockMarketFacts`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
 Hello and Welcome to Quick Facts for the Stock Market!
 
 This gem is meant to give you quick and simple facts about the Stock Market as a whole and also offers you to get some quick facts about any company you would like to search.
