@@ -1,10 +1,10 @@
 class StockMarketFacts::Company
 
-  attr_accessor :simple_performace, :today_trading, :growth, :competitors, :financials, :profile_info, :company_description, :company_contact, :shareholders, :top_executives
+  attr_accessor :simple_performance, :today_trading, :growth, :competitors, :financials, :profile_info, :company_description, :company_contact, :shareholders, :top_executives
 
   #create new object for a company
   def initialize(company_symbol)
-    @simple_performace = []
+    @simple_performance = []
     @today_trading = []
     @growth = []
     @competitors = []
@@ -41,15 +41,15 @@ class StockMarketFacts::Company
     todays_change_dollar = @quote_doc.css("td.wsod_change span")[1].text
     todays_change_percent = @quote_doc.css("td.wsod_change span")[2].text
     ytd_change = @quote_doc.css("td.wsod_ytd span").text
-    simple_performace_last_updated = @quote_doc.css("td.wsod_last span")[1].text
+    # simple_performance_last_updated = @quote_doc.css("td.wsod_last span")[1].text
 
     #add data to array
-    @simple_performace << [
+    @simple_performance << [
       current_price,
       todays_change_dollar,
       todays_change_percent,
       ytd_change,
-      simple_performace_last_updated
+      # simple_performance_last_updated
     ]
   end
 
@@ -58,7 +58,7 @@ class StockMarketFacts::Company
     today_trading1 = @quote_doc.css("div.clearfix.wsod_DataColumnLeft")[0]
     today_trading2 = today_trading1.css("tr")
     date_container = @quote_doc.css("div.clearfix.wsod_quoteDetails.wsod_containerSpacing")
-    @last_update_today_trading_and_growth = date_container.css("div.wsod_fRight")[0].text
+    # @last_update_today_trading_and_growth = date_container.css("div.wsod_fRight")[0].text
 
     #add data to array
     today_trading2.each do |x|
@@ -73,7 +73,7 @@ class StockMarketFacts::Company
     growth1 = @quote_doc.css("div.clearfix.wsod_DataColumnRight")[0]
     growth2 = growth1.css("tr")
     date_container = @quote_doc.css("div.clearfix.wsod_quoteDetails.wsod_containerSpacing")
-    @last_update_today_trading_and_growth = date_container.css("div.wsod_fRight")[0].text
+    # @last_update_today_trading_and_growth = date_container.css("div.wsod_fRight")[0].text
 
     #add data to array
     growth2.each do |x|
@@ -88,7 +88,7 @@ class StockMarketFacts::Company
     competitors1 = @quote_doc.css("div.clearfix.wsod_DataColumnLeft")[1]
     competitors2 = competitors1.css("tr")
     date_container = @quote_doc.css("div.clearfix.wsod_quoteDetails.wsod_containerSpacing")
-    @last_update_today_trading_and_growth = date_container.css("div.wsod_fRight")[0].text
+    # @last_update_today_trading_and_growth = date_container.css("div.wsod_fRight")[0].text
 
     #add data to array
     counter = 1
@@ -112,7 +112,7 @@ class StockMarketFacts::Company
     financials1 = @quote_doc.css("div.clearfix.wsod_DataColumnRight")[1]
     financials2 = financials1.css("tr")
     date_container = @quote_doc.css("div.clearfix.wsod_quoteDetails.wsod_containerSpacing")
-    @last_update_today_trading_and_growth = date_container.css("div.wsod_fRight")[0].text
+    # @last_update_today_trading_and_growth = date_container.css("div.wsod_fRight")[0].text
 
     #add data to array
     financials2.each do |x|
@@ -127,7 +127,7 @@ class StockMarketFacts::Company
     profile_info1 = @quote_doc.css("div.clearfix.wsod_DataColumnLeft")[2]
     profile_info2 = profile_info1.css("tr")
     date_container = @quote_doc.css("div.clearfix.wsod_quoteDetails.wsod_containerSpacing")
-    @last_update_today_trading_and_growth = date_container.css("div.wsod_fRight")[0].text
+    # @last_update_today_trading_and_growth = date_container.css("div.wsod_fRight")[0].text
 
     #add data to array
     profile_info2.each do |x|
@@ -202,7 +202,7 @@ class StockMarketFacts::Company
     pull_quote_data(company_symbol)
     grab_simple_performance
 
-    @simple_performace.each do |item|
+    @simple_performance.each do |item|
       line_break
       puts "Price: #{item[0].colorize( :blue )}"
       line_break
@@ -227,7 +227,7 @@ class StockMarketFacts::Company
       puts "#{item[0]} => #{item[1].colorize( :blue )}"
     end
     line_break
-    puts @last_update_today_trading_and_growth
+    # puts @last_update_today_trading_and_growth
     line_break
   end
 
@@ -241,7 +241,7 @@ class StockMarketFacts::Company
       puts "#{item[0]} => #{item[1].colorize( :blue )}"
     end
     line_break
-    puts @last_update_today_trading_and_growth
+    # puts @last_update_today_trading_and_growth
     line_break
   end
 
@@ -256,7 +256,7 @@ class StockMarketFacts::Company
       puts "Today's Change: #{item[2].colorize( :blue )} | Today's Percent Change: #{item[3].colorize( :blue )}"
     end
     line_break
-    puts @last_update_today_trading_and_growth
+    # puts @last_update_today_trading_and_growth
     line_break
   end
 
@@ -270,7 +270,7 @@ class StockMarketFacts::Company
       puts "#{item[0]} => #{item[1].colorize( :blue )}"
     end
     line_break
-    puts @last_update_today_trading_and_growth
+    # puts @last_update_today_trading_and_growth
     line_break
   end
 
@@ -347,7 +347,7 @@ class StockMarketFacts::Company
 
   #clear all object data
   def clear_data
-    @simple_performace = []
+    @simple_performance = []
     @today_trading = []
     @growth = []
     @competitors = []
