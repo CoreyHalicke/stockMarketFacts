@@ -193,7 +193,7 @@ class StockMarketFacts::Company
   ##### PRINT METHODS #####
 
   def print_company(choice)
-    
+
 
   end
 

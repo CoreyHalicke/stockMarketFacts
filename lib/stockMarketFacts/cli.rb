@@ -39,7 +39,6 @@ class StockMarketFacts::CLI
     puts "[x] to exit".colorize( :gray )
   end
 
-
   def main_menu
   @input = nil
   list_menu
@@ -48,7 +47,7 @@ class StockMarketFacts::CLI
   choices = [
     {title: "Most Popular Stocks", method_name: "popular_stocks"},
     {title: "Key Stats", method_name: "key_stats"},
-    {title: "World Markets", method_name: nil},
+    {title: "World Markets", method_name: "world_market"},
     {title: "Gainers", method_name: "gainers"},
     {title: "Losers", method_name: "losers"},
     {title: "Sector Performance", method_name: "sector_performance"},
@@ -56,139 +55,48 @@ class StockMarketFacts::CLI
     {title: "How stocks are doing this year", method_name: "ytd_stock_performance"}
   ]
 
-
-
-
-    while @input != 'x'
-      @input = gets.strip.downcase
+  while @input != 'x'
+    @input = gets.strip.downcase
+    puts_blanks
+    if @input.to_i.between?(1, choices.length)
+      user_choice = choices[@input.to_i - 1]
+      puts "::: #{user_choice[:title]} :::".colorize( :blue )
+      blank
+      @market.print_market(user_choice[:method_name])
+    else
       case @input
-      when "m"
-        main_menu
+        when "m"
+          main_menu
 
-      when "1"
-        puts_blanks
-        puts "::: Most Popular Stocks :::".colorize( :blue )
-        blank
-        @market.print_market(@market.popular_stocks)
-        options
+        when "s"
+          puts "::: Search by Stock Symbol :::".colorize( :blue )
+          blank
+          puts "Type in the Stock Symbol for the Company you are looking for:"
+          search_stock_menu
 
-      when "2"
-        puts_blanks
-        puts "::: Key Stats :::".colorize( :blue )
-        blank
-        @market.print_market(@market.key_stats)
-        options
+        when "x"
 
-      when "3"
-        puts_blanks
-        puts "::: World Markets :::".colorize( :blue )
-        blank
-        puts "Coming Soon..."
-        options
-
-      when "4"
-        puts_blanks
-        puts "::: Gainers :::".colorize( :blue )
-        blank
-        @market.print_market(@market.gainers)
-        options
-
-      when "5"
-        puts_blanks
-        puts "::: Losers :::".colorize( :blue )
-        blank
-        @market.print_market(@market.losers)
-        options
-
-      when "6"
-        puts_blanks
-        puts "::: Sector Performance :::".colorize( :blue )
-        blank
-        puts "Coming Soon..."
-        options
-
-      when "7"
-        puts_blanks
-        puts "::: Commodities :::".colorize( :blue )
-        blank
-        @market.print_market(@market.commodities)
-        options
-
-      when "8"
-        puts_blanks
-        puts "::: How stocks are doing this year :::".colorize( :blue )
-        blank
-        @market.print_market(@market.ytd_stock_performance)
-        options
-
-      when "s"
-        puts_blanks
-        puts "::: Search by Stock Symbol :::".colorize( :blue )
-        blank
-        puts "Type in the Stock Symbol for the Company you are looking for:"
-        search_stock_menu
-
-      when "x"
-
-      when "a"
-        choices.each do |option|
-          puts "::: #{option[:title]} :::".colorize( :blue )
-          if option[:method_name]
-            @market.print_market(option[:method_name])
-          else
-            puts "Coming Soon..."
+        when "a"
+          choices.each do |option|
+            blank
+            puts "::: #{option[:title]} :::".colorize( :blue )
+            if option[:method_name]
+              @market.print_market(option[:method_name])
+            else
+              puts "Coming Soon..."
+            end
+            blank
           end
-          options
-        end
 
-        # puts_blanks
-        # puts "::: Most Popular Stocks :::".colorize( :blue )
-        # blank
-        # @market.print_market(@market.popular_stocks)
-        #
-        # puts_blanks
-        # puts "::: Key Stats :::".colorize( :blue )
-        # blank
-        # @market.print_market(@market.key_stats)
-        #
-        # puts_blanks
-        # puts "::: World Markets :::".colorize( :blue )
-        # blank
-        # puts "Coming Soon..."
-        #
-        # puts_blanks
-        # puts "::: Gainers :::".colorize( :blue )
-        # blank
-        # @market.print_market(@market.gainers)
-        #
-        #
-        # puts_blanks
-        # puts "::: Losers :::".colorize( :blue )
-        # blank
-        # @market.print_market(@market.losers)
-        #
-        # puts_blanks
-        # puts "::: Sector Performance :::".colorize( :blue )
-        # blank
-        # puts "Coming Soon..."
-        #
-        # puts_blanks
-        # puts "::: Commodities :::".colorize( :blue )
-        # blank
-        # @market.print_market(@market.commodities)
-        #
-        # puts_blanks
-        # puts "::: How stocks are doing this year :::".colorize( :blue )
-        # blank
-        # @market.print_market(@market.ytd_stock_performance)
-        # options
-
-      else
-        puts_blanks
-        puts "Not sure what you want, please pick an option from the menu.".colorize( :red )
-        list_menu
+        else
+          puts_blanks
+          error_message
+          list_menu
       end
     end
+    options
+  end
+  blank
   end
 
   #goodbye message when leaving app
@@ -198,6 +106,10 @@ class StockMarketFacts::CLI
     puts "See you soon!".colorize( :blue )
     blank
     # @market.clear_data
+  end
+
+  def error_message
+    puts "Not sure what you want, please pick an option from the menu.".colorize( :red )
   end
 
   #second level cli menu
@@ -239,158 +151,78 @@ class StockMarketFacts::CLI
   def search_stock_menu
     @input = nil
     @company_symbol = gets.strip.upcase
-    company = StockMarketFacts::Company.new(@company_symbol)
+    @company = StockMarketFacts::Company.new(@company_symbol)
     #needs to validate stock symbol input
-    quote_doc = company.pull_quote_data(@company_symbol)
+    quote_doc = @company.pull_quote_data(@company_symbol)
 
     until quote_doc.css("h1").text != "Symbol not found"
       puts "Please enter a valid Stock Symbol.".colorize( :red )
       @company_symbol = gets.strip.upcase
-      quote_doc = company.pull_quote_data(@company_symbol)
+      quote_doc = @company.pull_quote_data(@company_symbol)
     end
 
     @company_name = quote_doc.css("h1").text
 
     list_stock_search_menu
+
+    choices = [
+      {title: "Quick Facts", method_name: "simple_performance"},
+      {title: "Today's Trading Information", method_name: "today_trading"},
+      {title: "Growth & Valuation", method_name: "growth"},
+      {title: "Competitors", method_name: "competitors"},
+      {title: "Financials", method_name: "financials"},
+      {title: "Profile", method_name: "profile_info"},
+      {title: "Company Description", method_name: "company_description"},
+      {title: "Company Contact Information", method_name: "company_contact_info"},
+      {title: "Shareholders", method_name: "shareholders"},
+      {title: "Top Executives", method_name: "top_executives"},
+    ]
+
     while @input != 'x'
       @input = gets.strip.downcase
-      case @input
-      when "m"
-        main_menu
-      when "b"
-        list_stock_search_menu
-      when "1"
-        ### quote url
+      if @input.to_i.between?(1, choices.length)
         puts_blanks
-        puts "::: #{@company_name} - Quick Facts :::".colorize( :blue )
+        user_choice = choices[@input.to_i - 1]
+        puts "::: #{@company_name} - #{user_choice[:title]} :::".colorize( :blue )
         blank
-        company.print_simple_performance(@company_symbol)
-        search_stock_options
-      when "2"
-        ### quote url
-        puts_blanks
-        puts "::: #{@company_name} - Today's Trading Information :::".colorize( :blue )
-        blank
-        company.print_today_trading(@company_symbol)
-        search_stock_options
-      when "3"
-        ### quote url
-        puts_blanks
-        puts "::: #{@company_name} - Growth & Valuation :::".colorize( :blue )
-        blank
-        company.print_growth(@company_symbol)
-        search_stock_options
-      when "4"
-        ### quote url
-        puts_blanks
-        puts "::: #{@company_name} - Competitors :::".colorize( :blue )
-        blank
-        company.print_competitors(@company_symbol)
-        search_stock_options
-      when "5"
-        ### quote url
-        puts_blanks
-        puts "::: #{@company_name} - Financials :::".colorize( :blue )
-        blank
-        company.print_financials(@company_symbol)
-        search_stock_options
-      when "6"
-        ### quote url
-        puts_blanks
-        puts "::: #{@company_name} - Profile :::".colorize( :blue )
-        blank
-        company.print_profile_info(@company_symbol)
-        search_stock_options
-      when "7"
-        ### profile url
-        puts_blanks
-        puts "::: #{@company_name} - Company Description :::".colorize( :blue )
-        blank
-        company.print_company_description(@company_symbol)
-        search_stock_options
-      when "8"
-        ### profile url
-        puts_blanks
-        puts "::: #{@company_name} - Company Contact Information :::".colorize( :blue )
-        blank
-        company.print_company_contact_info(@company_symbol)
-        search_stock_options
-      when "9"
-        ### profile url
-        puts_blanks
-        puts "::: #{@company_name} - Shareholders :::".colorize( :blue )
-        blank
-        company.print_shareholders(@company_symbol)
-        search_stock_options
-      when "10"
-        ### profile url
-        puts_blanks
-        puts "::: #{@company_name} - Top Executives :::".colorize( :blue )
-        blank
-        company.print_top_executives(@company_symbol)
-        search_stock_options
-      when "x"
-
-      when "a"
-        puts_blanks
-        puts "::: #{@company_name} - Quick Facts :::".colorize( :blue )
-        blank
-        company.print_simple_performance(@company_symbol)
-
-        puts_blanks
-        puts "::: #{@company_name} - Today's Trading Information :::".colorize( :blue )
-        blank
-        company.print_today_trading(@company_symbol)
-
-        puts_blanks
-        puts "::: #{@company_name} - Growth & Valuation :::".colorize( :blue )
-        blank
-        company.print_growth(@company_symbol)
-
-        puts_blanks
-        puts "::: #{@company_name} - Competitors :::".colorize( :blue )
-        blank
-        company.print_competitors(@company_symbol)
-
-        puts_blanks
-        puts "::: #{@company_name} - Financials :::".colorize( :blue )
-        blank
-        company.print_financials(@company_symbol)
-
-        puts_blanks
-        puts "::: #{@company_name} - Profile :::".colorize( :blue )
-        blank
-        company.print_profile_info(@company_symbol)
-
-        puts_blanks
-        puts "::: #{@company_name} - Company Description :::".colorize( :blue )
-        blank
-        company.print_company_description(@company_symbol)
-
-        puts_blanks
-        puts "::: #{@company_name} - Company Contact Information :::".colorize( :blue )
-        blank
-        company.print_company_contact_info(@company_symbol)
-
-        puts_blanks
-        puts "::: #{@company_name} - Shareholders :::".colorize( :blue )
-        blank
-        company.print_shareholders(@company_symbol)
-
-        puts_blanks
-        puts "::: #{@company_name} - Top Executives :::".colorize( :blue )
-        blank
-        company.print_top_executives(@company_symbol)
-        search_stock_options
-
+        @company.send("print_#{user_choice[:method_name]}", @company_symbol)
       else
-        puts_blanks
-        puts "Not sure what you want, please pick an option from the menu.".colorize( :red )
-        blank
-        list_stock_search_menu
-        search_stock_options
+        case @input
+          when "m"
+            main_menu
+
+          when 'b'
+            list_stock_search_menu
+
+          when "s"
+            puts "::: Search by Stock Symbol :::".colorize( :blue )
+            blank
+            puts "Type in the Stock Symbol for the Company you are looking for:"
+            search_stock_menu
+
+          when "x"
+
+          when "a"
+            choices.each do |option|
+              blank
+              puts "::: #{option[:title]} :::".colorize( :blue )
+              if option[:method_name]
+                @company.send("print_#{option[:method_name]}", @company_symbol)
+              else
+                puts "Coming Soon..."
+              end
+              blank
+            end
+
+          else
+            puts_blanks
+            error_message
+            list_menu
+        end
       end
+      search_stock_options
     end
+
   end
 
 

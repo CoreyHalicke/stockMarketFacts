@@ -59,11 +59,12 @@ class StockMarketFacts::Market
 
   #fill world market data
   def grab_world_market
-    world_markets = @market_doc.css("div.module-body.wsod.world-markets")
-    world_markets.css("a.world-market").each do |x|
-      name = x.css("h3.world-market-name").text
-      # figure out source
-    end
+    @world_market << "Coming soon..."
+    # world_markets = @market_doc.css("div.module-body.wsod.world-markets")
+    # world_markets.css("a.world-market").each do |x|
+    #   name = x.css("h3.world-market-name").text
+    #   # figure out source
+    # end
   end
 
   #fill gainers
@@ -90,6 +91,7 @@ class StockMarketFacts::Market
   def grab_sector_performance
     # sector_performance = @market_doc.css("div.module-body")
     # sector_performance.css("")
+    @sector_performance << "Coming soon..."
   end
 
   #fill commodities
@@ -122,7 +124,6 @@ class StockMarketFacts::Market
 
   def print_market(choice)
     self.send(choice).each do |x|
-
       line_break
       case choice
       when "popular_stocks", "key_stats", "commodities"
@@ -130,8 +131,11 @@ class StockMarketFacts::Market
 
       when "gainers", "losers", "ytd_stock_performance"
         puts "Name: #{x[0].colorize( :blue )} | Change: #{x[1].colorize( :blue )}"
+      else
+        puts x
       end
     end
+    line_break
   end
 
   ##### COSMETIC METHODS #####
