@@ -4,35 +4,7 @@ Hello and Welcome to Quick Facts for the Stock Market!
 
 This gem is meant to give you quick and simple facts about the Stock Market as a whole and also offers you to get some quick facts about any company you would like to search.
 
-The data in this gem is pulled from the CNN Money site. The follow menu's are a glimpse into what this gem offers you to view:
-
-Stock Market Menu:
-[1] Most Popular Stocks
-[2] Key Stats
-[3] World Markets *Coming Soon*
-[4] Gainers
-[5] Losers
-[6] Sector Performance *Coming Soon*
-[7] Commodities
-[8] How stocks are doing this year
-[a] to run all
-[s] Search by Stock Symbol
-[x] Exit Program
-
-
-Company Stock Menu:
-[1] Current Price / Today's Change / Year-to-Date Change
-[2] Today's Trading Information
-[3] Growth & Valuation
-[4] Competitors
-[5] Financials
-[6] Profile
-[7] Company Description
-[8] Company Contact Information
-[9] Shareholders
-[10] Top Executives *Coming Soon*
-[a] to run all
-[x] Exit Program
+The data in this gem is pulled from the CNN Money site.
 
 
 ## Installation
@@ -53,7 +25,41 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Once app is open, you will be prompted with the main menu:
+
+Stock Market Menu:
+[1] Most Popular Stocks
+[2] Key Stats
+[3] World Markets *Coming Soon*
+[4] Gainers
+[5] Losers
+[6] Sector Performance *Coming Soon*
+[7] Commodities
+[8] How stocks are doing this year
+[a] to run all
+[s] Search by Stock Symbol
+[x] Exit Program
+
+Select an option from the menu to print the data you are requesting.
+
+If you select [s] to search a Stock Symbol, you will be asked which stock you are requesting information for. Then you will be prompted with the Company Stock Menu:
+
+Company Stock Menu:
+[1] Current Price / Today's Change / Year-to-Date Change
+[2] Today's Trading Information
+[3] Growth & Valuation
+[4] Competitors
+[5] Financials
+[6] Profile
+[7] Company Description
+[8] Company Contact Information
+[9] Shareholders
+[10] Top Executives *Coming Soon*
+[a] to run all
+[x] Exit Program
+
+Select an option from the menu to print the data you are requesting.
+
 
 ## Development
 
