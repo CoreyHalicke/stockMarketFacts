@@ -2,31 +2,36 @@ class StockMarketFacts::CLI
 
   def call
     puts_blanks
-    puts "Welcome to Quick Stock Market Facts!".colorize( :blue )
-
-    main_menu
+    welcome
+    # main_menu
     goodbye
   end
 
+  def welcome
+    puts "Welcome to Quick Stock Market Facts!".colorize( :blue )
+    puts "Ready to get started? [y/n]"
+    ready = gets.strip.downcase
+    if ready == "y"
+      main_menu
+    end
+
+  end
+
   def list_menu
-    puts <<-DOC
+    puts_blanks
+    puts "::: MARKET MENU :::".colorize( :blue )
+    blank
+    choice_num = 1
+    puts "What would you like to view about the market?"
+    blank
+    @@market_choices.each do |choice|
+      puts "[#{choice_num}] #{choice[:title]}"
+      choice_num += 1
+    end
 
-    ::: MAIN MENU :::
-
-    What would you like to view about the market?
-      [1] Most Popular Stocks
-      [2] Key Stats
-      [3] World Markets *Coming Soon*
-      [4] Gainers
-      [5] Losers
-      [6] Sector Performance *Coming Soon*
-      [7] Commodities
-      [8] How stocks are doing this year
-      [a] to run all
-      [s] Search by Stock Symbol
-      [x] Exit Program
-
-    DOC
+    puts "[a] to run all"
+    puts "[s] Search by Stock Symbol"
+    puts "[x] Exit Program"
 
   end
 
@@ -41,10 +46,7 @@ class StockMarketFacts::CLI
 
   def main_menu
   @input = nil
-  list_menu
-  @market = StockMarketFacts::Market.new
-
-  choices = [
+  @@market_choices = [
     {title: "Most Popular Stocks", method_name: "popular_stocks"},
     {title: "Key Stats", method_name: "key_stats"},
     {title: "World Markets", method_name: "world_market"},
@@ -55,14 +57,19 @@ class StockMarketFacts::CLI
     {title: "How stocks are doing this year", method_name: "ytd_stock_performance"}
   ]
 
+  list_menu
+  @market = StockMarketFacts::Market.new
+
+
   while @input != 'x'
     @input = gets.strip.downcase
     puts_blanks
-    if @input.to_i.between?(1, choices.length)
-      user_choice = choices[@input.to_i - 1]
+    if @input.to_i.between?(1, @@market_choices.length)
+      user_choice = @@market_choices[@input.to_i - 1]
       puts "::: #{user_choice[:title]} :::".colorize( :blue )
       blank
       @market.print_market(user_choice[:method_name])
+      options
     else
       case @input
         when "m"
@@ -77,7 +84,7 @@ class StockMarketFacts::CLI
         when "x"
 
         when "a"
-          choices.each do |option|
+          @@market_choices.each do |option|
             blank
             puts "::: #{option[:title]} :::".colorize( :blue )
             if option[:method_name]
@@ -87,6 +94,7 @@ class StockMarketFacts::CLI
             end
             blank
           end
+          options
 
         else
           puts_blanks
@@ -94,7 +102,6 @@ class StockMarketFacts::CLI
           list_menu
       end
     end
-    options
   end
   blank
   end
@@ -102,7 +109,7 @@ class StockMarketFacts::CLI
   #goodbye message when leaving app
   def goodbye
     puts_blanks
-    puts "Thank you for using Quick Stock Market Facts!".colorize( :blue )
+    puts "Have a great day!".colorize( :blue )
     puts "See you soon!".colorize( :blue )
     blank
     # @market.clear_data
@@ -114,27 +121,19 @@ class StockMarketFacts::CLI
 
   #second level cli menu
   def list_stock_search_menu
-    puts <<-DOC
+    choice_num = 1
+    puts_blanks
+    puts "::: #{@company_name} STOCK MENU :::".colorize( :blue )
+    blank
+    puts "What would you like to view about #{@company_name}?"
+    blank
+    @@company_choices.each do |choice|
+      puts "[#{choice_num}] #{choice[:title]}"
+      choice_num += 1
+    end
 
-    ::: #{@company_name} STOCK MENU :::
-
-    What would you like to know about #{@company_name}?
-      [1] Current Price / Today's Change / Year-to-Date Change
-      [2] Today's Trading Information
-      [3] Growth & Valuation
-      [4] Competitors
-      [5] Financials
-      [6] Profile
-      [7] Company Description
-      [8] Company Contact Information
-      [9] Shareholders
-      [10] Top Executives *Coming Soon*
-      [a] to run all
-      [x] Exit Program
-
-
-    DOC
-
+    puts "[a] to run all"
+    puts "[x] Exit Program"
   end
 
   #print simple instructions in second level cli
@@ -149,6 +148,18 @@ class StockMarketFacts::CLI
 
   #second level cli
   def search_stock_menu
+    @@company_choices = [
+      {title: "Quick Facts", method_name: "simple_performance"},
+      {title: "Today's Trading Information", method_name: "today_trading"},
+      {title: "Growth & Valuation", method_name: "growth"},
+      {title: "Competitors", method_name: "competitors"},
+      {title: "Financials", method_name: "financials"},
+      {title: "Profile", method_name: "profile_info"},
+      {title: "Company Description", method_name: "company_description"},
+      {title: "Company Contact Information", method_name: "company_contact_info"},
+      {title: "Shareholders", method_name: "shareholders"},
+      {title: "Top Executives", method_name: "top_executives"},
+    ]
     @input = nil
     @company_symbol = gets.strip.upcase
     @company = StockMarketFacts::Company.new(@company_symbol)
@@ -165,27 +176,17 @@ class StockMarketFacts::CLI
 
     list_stock_search_menu
 
-    choices = [
-      {title: "Quick Facts", method_name: "simple_performance"},
-      {title: "Today's Trading Information", method_name: "today_trading"},
-      {title: "Growth & Valuation", method_name: "growth"},
-      {title: "Competitors", method_name: "competitors"},
-      {title: "Financials", method_name: "financials"},
-      {title: "Profile", method_name: "profile_info"},
-      {title: "Company Description", method_name: "company_description"},
-      {title: "Company Contact Information", method_name: "company_contact_info"},
-      {title: "Shareholders", method_name: "shareholders"},
-      {title: "Top Executives", method_name: "top_executives"},
-    ]
 
     while @input != 'x'
       @input = gets.strip.downcase
-      if @input.to_i.between?(1, choices.length)
+      if @input.to_i.between?(1, @@company_choices.length)
         puts_blanks
-        user_choice = choices[@input.to_i - 1]
+        user_choice = @@company_choices[@input.to_i - 1]
         puts "::: #{@company_name} - #{user_choice[:title]} :::".colorize( :blue )
         blank
         @company.send("print_#{user_choice[:method_name]}", @company_symbol)
+        search_stock_options
+
       else
         case @input
           when "m"
@@ -203,7 +204,7 @@ class StockMarketFacts::CLI
           when "x"
 
           when "a"
-            choices.each do |option|
+            @@company_choices.each do |option|
               blank
               puts "::: #{option[:title]} :::".colorize( :blue )
               if option[:method_name]
@@ -213,6 +214,7 @@ class StockMarketFacts::CLI
               end
               blank
             end
+            search_stock_options
 
           else
             puts_blanks
@@ -220,7 +222,6 @@ class StockMarketFacts::CLI
             list_menu
         end
       end
-      search_stock_options
     end
 
   end
@@ -230,16 +231,11 @@ class StockMarketFacts::CLI
 
 
   def puts_blanks
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
-    puts ""
+    puts "\n\n\n\n\n\n"
   end
 
   def blank
-    puts ""
+    puts "\n"
   end
 
 end

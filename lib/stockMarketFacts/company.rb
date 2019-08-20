@@ -211,8 +211,8 @@ class StockMarketFacts::Company
       puts "Today's Percent Change: #{item[2].colorize( :blue )}"
       line_break
       puts "YTD Change #{item[3].colorize( :blue )}"
-      line_break
-      puts "Last Updated: #{item[4]}"
+      # line_break
+      # puts "Last Updated: #{item[4]}"
     end
     line_break
   end
@@ -228,7 +228,7 @@ class StockMarketFacts::Company
     end
     line_break
     # puts @last_update_today_trading_and_growth
-    line_break
+    # line_break
   end
 
   def print_growth(company_symbol)
@@ -242,7 +242,7 @@ class StockMarketFacts::Company
     end
     line_break
     # puts @last_update_today_trading_and_growth
-    line_break
+    # line_break
   end
 
   def print_competitors(company_symbol)
@@ -257,7 +257,7 @@ class StockMarketFacts::Company
     end
     line_break
     # puts @last_update_today_trading_and_growth
-    line_break
+    # line_break
   end
 
   def print_financials(company_symbol)
@@ -271,7 +271,7 @@ class StockMarketFacts::Company
     end
     line_break
     # puts @last_update_today_trading_and_growth
-    line_break
+    # line_break
   end
 
   def print_profile_info(company_symbol)
