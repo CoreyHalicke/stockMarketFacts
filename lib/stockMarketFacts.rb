@@ -8,3 +8,4 @@ require_relative "stockMarketFacts/version"
 require_relative './stockMarketFacts/cli'
 require_relative './stockMarketFacts/market'
 require_relative './stockMarketFacts/company'
+require_relative './stockMarketFacts/scraper'
