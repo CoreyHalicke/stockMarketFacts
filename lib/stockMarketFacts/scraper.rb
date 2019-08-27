@@ -10,5 +10,4 @@ class StockMarketFacts::Scraper
     @market_html_doc = Nokogiri::HTML(open(market_url))
   end
 
-
 end
