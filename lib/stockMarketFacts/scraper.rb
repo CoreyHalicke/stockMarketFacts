@@ -5,7 +5,7 @@ class StockMarketFacts::Scraper
     @market_html_doc = ""
   end
 
-  def scrape
+  def scrape_market
     market_url = "https://money.cnn.com/data/markets/"
     @market_html_doc = Nokogiri::HTML(open(market_url))
   end
