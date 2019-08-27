@@ -20,9 +20,9 @@ class StockMarketFacts::Market
 
   # pull market data and store it
   def pull_data
-    market_url = "https://money.cnn.com/data/markets/"
-    @market_doc = Nokogiri::HTML(open(market_url))
-
+    @market_doc = StockMarketFacts::Scraper.new.scrape
+    # market_url = "https://money.cnn.com/data/markets/"
+    # @market_doc = Nokogiri::HTML(open(market_url))
     grab_popular_stock
     grab_key_stats
     grab_world_market
